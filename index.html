@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="description" content="La Bontà Ristorante - Ristorante Italiano a Valle Martella. Pesce fresco, pizza al forno a legna, pasta fatta in casa." />
+  <meta name="theme-color" content="#c9a14a" />
+  <title>La Bontà Ristorante | Valle Martella</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Splash Screen -->
+<div id="splash" aria-hidden="true">
+  <div class="splash-circle">
+    <div class="splash-logo">La Bontà</div>
+    <div class="splash-subtitle">Ristorante</div>
+    <div class="splash-location">
+      <i class="fas fa-map-marker-alt"></i>
+      Valle Martella, Roma
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+<header>
+  <div class="header-container">
+    <div class="logo-container">
+      <h1 class="logo">La Bontà</h1>
+      <div class="logo-subtitle">Ristorante Italiano</div>
+    </div>
+    
+    <div class="header-controls">
+      <div class="lang-switch">
+        <button data-lang="it" class="active" aria-pressed="true">
+          <span class="lang-flag">🇮🇹</span>
+          <span class="lang-code">IT</span>
+        </button>
+        <button data-lang="en" aria-pressed="false">
+          <span class="lang-flag">🇬🇧</span>
+          <span class="lang-code">EN</span>
+        </button>
+        <button data-lang="fr" aria-pressed="false">
+          <span class="lang-flag">🇫🇷</span>
+          <span class="lang-code">FR</span>
+        </button>
+        <button data-lang="de" aria-pressed="false">
+          <span class="lang-flag">🇩🇪</span>
+          <span class="lang-code">DE</span>
+        </button>
+      </div>
+      
+      <div class="header-contact">
+        <a href="tel:+393474329466" class="contact-link">
+          <i class="fas fa-phone"></i>
+          <span>347 432 9466</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- TIER 1: Sticky Navigation -->
+<nav id="sticky-nav" class="sticky-nav" aria-label="Navigazione principale">
+  <div class="sticky-nav-inner">
+    <a href="#hero" class="sticky-logo">La Bontà</a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#menu" data-section="menu">Menu</a></li>
+      <li><a href="#combos" data-section="combos">Menù</a></li>
+      <li><a href="#gallery" data-section="gallery">Galleria</a></li>
+      <li><a href="#location" data-section="location">Dove Siamo</a></li>
+      <li><a href="#contatti" data-section="contatti">Contatti</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Apri menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="nav-drawer-overlay" id="navDrawerOverlay"></div>
+  <ul class="nav-drawer" id="navDrawer" aria-hidden="true">
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#combos">Menù</a></li>
+    <li><a href="#gallery">Galleria</a></li>
+    <li><a href="#location">Dove Siamo</a></li>
+    <li><a href="#contatti">Contatti</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<section id="hero" aria-labelledby="hero-title">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-logo">
+      <h1 id="hero-title">La Bontà</h1>
+      <div class="hero-subtitle">Ristorante Italiano</div>
+    </div>
+    
+    <div class="hero-info">
+      <div class="info-item">
+        <i class="fas fa-map-marker-alt"></i>
+        <div>
+          <div class="info-label">Location</div>
+          <div class="info-value">Via Riccardo Lombardi, 1<br>Valle Martella (RM)</div>
+        </div>
+      </div>
+      <div class="info-item">
+        <i class="fas fa-clock"></i>
+        <div>
+          <div class="info-label">Orari</div>
+          <div class="info-value">12:30 - 15:30 • 18:30 - 23:00</div>
+        </div>
+      </div>
+      <div class="info-item">
+        <i class="fas fa-star"></i>
+        <div>
+          <div class="info-label">Valutazione</div>
+          <div class="info-value">
+            <span class="stars">★★★★☆</span>
+            <span class="rating">4.3/5</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="hero-cta">
+      <button id="explore-btn" class="cta-button pulse">
+        <i class="fas fa-utensils"></i>
+        <span>Esplora il Menu</span>
+      </button>
+      <a href="https://maps.app.goo.gl/krswxMJfJtvFPN9j8" target="_blank" class="cta-button secondary">
+        <i class="fas fa-directions"></i>
+        <span>Come Raggiungerci</span>
+      </a>
+    </div>
+  </div>
+  
+  <div class="hero-scroll">
+    <div class="scroll-indicator">
+      <i class="fas fa-chevron-down"></i>
+    </div>
+  </div>
+</section>
+
+<!-- Interactive Circle - Food Categories -->
+<section id="menu" class="circle-section">
+  <div class="section-header">
+    <h2>Il Nostro <span class="gold-text">Menu</span></h2>
+    <p class="section-subtitle">Clicca sulle icone per scoprire le nostre categorie culinarie</p>
+  </div>
+  
+  <div class="circle-interactive">
+    <div class="circle-container">
+      <!-- Main Circle -->
+      <div class="main-circle" id="mainCircle">
+        <div class="circle-glow"></div>
+        <div class="circle-border"></div>
+        
+        <!-- Center Logo -->
+        <div class="circle-center">
+          <div class="center-logo">La Bontà</div>
+          <div class="center-subtitle">Valle Martella</div>
+          <button class="center-play" id="toggleRotation">
+            <i class="fas fa-pause" id="rotationIcon"></i>
+          </button>
+        </div>
+        
+        <!-- Interactive Items - 5 Food Categories -->
+        <div class="circle-item" data-category="antipasti" style="--i:0">
+          <div class="item-content">
+            <i class="fas fa-cheese"></i>
+            <span>Antipasti</span>
+          </div>
+          <div class="item-tooltip">Starters</div>
+        </div>
+        
+        <div class="circle-item" data-category="primi" style="--i:1">
+          <div class="item-content">
+            <i class="fas fa-bowl-food"></i>
+            <span>Primi</span>
+          </div>
+          <div class="item-tooltip">Pasta</div>
+        </div>
+        
+        <div class="circle-item" data-category="secondi" style="--i:2">
+          <div class="item-content">
+            <i class="fas fa-fish"></i>
+            <span>Secondi</span>
+          </div>
+          <div class="item-tooltip">Main Courses</div>
+        </div>
+        
+        <div class="circle-item" data-category="pizza" style="--i:3">
+          <div class="item-content">
+            <i class="fas fa-pizza-slice"></i>
+            <span>Pizza</span>
+          </div>
+          <div class="item-tooltip">Wood-Fired</div>
+        </div>
+        
+        <div class="circle-item" data-category="dolci" style="--i:4">
+          <div class="item-content">
+            <i class="fas fa-cake-candles"></i>
+            <span>Dolci</span>
+          </div>
+          <div class="item-tooltip">Desserts</div>
+        </div>
+        
+        <!-- Navigation -->
+        <button class="circle-nav prev">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="circle-nav next">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+      
+      <!-- Selection Display -->
+      <div class="selection-display">
+        <div class="selection-header">
+          <h3 id="selectedTitle">Seleziona una Categoria</h3>
+          <div class="selection-badge" id="selectedBadge"></div>
+        </div>
+        <p class="selection-desc" id="selectedDesc">
+          Clicca su una delle icone per scoprire i piatti di ogni categoria
+        </p>
+        <div class="selection-price">
+          <span class="price-label">Prezzo:</span>
+          <span class="price-value" id="selectedPrice">--</span>
+        </div>
+        <button class="selection-button" id="viewDetailsBtn" disabled>
+          <i class="fas fa-eye"></i>
+          <span>Vedi Menu</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Combos Grid -->
+<section id="combos" class="combos-grid">
+  <div class="section-header">
+    <h2>I Nostri <span class="gold-text">Menu</span></h2>
+    <p class="section-subtitle">Esperienze complete curate dai nostri chef</p>
+  </div>
+  
+  <div class="grid-container">
+    <!-- Couples Combo -->
+    <div class="combo-card featured" data-combo="couples">
+      <div class="card-ribbon">Romantico</div>
+      <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1559925393-8be0ec4767c8?auto=format&fit=crop&q=80&w=800')"></div>
+      <div class="card-content">
+        <div class="card-header">
+          <div class="card-icon">
+            <i class="fas fa-heart"></i>
+          </div>
+          <h3 class="card-title">Menu Coppia</h3>
+          <p class="card-subtitle">Romantico per 2</p>
+        </div>
+        <div class="card-body">
+          <ul class="card-features">
+            <li><i class="fas fa-check-circle"></i> Antipasto di Mare</li>
+            <li><i class="fas fa-check-circle"></i> Pasta allo Scoglio</li>
+            <li><i class="fas fa-check-circle"></i> Vino + Dolce + Caffè</li>
+          </ul>
+          <div class="card-price">
+            <div class="price-main">€90</div>
+            <div class="price-note">per 2 persone</div>
+          </div>
+        </div>
+        <button class="card-button" data-combo="couples">
+          <span>Scegli Questo</span>
+          <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+    
+    <!-- Family Combo -->
+    <div class="combo-card" data-combo="family">
+      <div class="card-ribbon">Famiglia</div>
+      <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&q=80&w=800')"></div>
+      <div class="card-content">
+        <div class="card-header">
+          <div class="card-icon">
+            <i class="fas fa-home"></i>
+          </div>
+          <h3 class="card-title">Menu Famiglia</h3>
+          <p class="card-subtitle">Abbondante e Conviviale</p>
+        </div>
+        <div class="card-body">
+          <ul class="card-features">
+            <li><i class="fas fa-check-circle"></i> Tagliere Misto Grande</li>
+            <li><i class="fas fa-check-circle"></i> Grigliata Mista</li>
+            <li><i class="fas fa-check-circle"></i> Vino + Contorni + Dolci</li>
+          </ul>
+          <div class="card-price">
+            <div class="price-main">€156</div>
+            <div class="price-note">da 4 persone</div>
+          </div>
+        </div>
+        <button class="card-button" data-combo="family">
+          <span>Scegli Questo</span>
+          <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+    
+    <!-- Friends Combo -->
+    <div class="combo-card" data-combo="friends">
+      <div class="card-ribbon">Gruppo</div>
+      <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&q=80&w=800')"></div>
+      <div class="card-content">
+        <div class="card-header">
+          <div class="card-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <h3 class="card-title">Menu Amici</h3>
+          <p class="card-subtitle">Condivisione e Allegria</p>
+        </div>
+        <div class="card-body">
+          <ul class="card-features">
+            <li><i class="fas fa-check-circle"></i> Pizza Assortita</li>
+            <li><i class="fas fa-check-circle"></i> Bruschette e Fritti</li>
+            <li><i class="fas fa-check-circle"></i> Birra + Dolce</li>
+          </ul>
+          <div class="card-price">
+            <div class="price-main">€69</div>
+            <div class="price-note">base + persona</div>
+          </div>
+        </div>
+        <button class="card-button" data-combo="friends">
+          <span>Scegli Questo</span>
+          <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Chef Selection -->
+    <div class="combo-card" data-combo="chef">
+      <div class="card-ribbon">Consigliato</div>
+      <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&q=80&w=800')"></div>
+      <div class="card-content">
+        <div class="card-header">
+          <div class="card-icon">
+            <i class="fas fa-crown"></i>
+          </div>
+          <h3 class="card-title">Selezione dello Chef</h3>
+          <p class="card-subtitle">Il Meglio del Menu</p>
+        </div>
+        <div class="card-body">
+          <ul class="card-features">
+            <li><i class="fas fa-check-circle"></i> Antipasto + Primo + Secondo</li>
+            <li><i class="fas fa-check-circle"></i> Calice di Vino</li>
+            <li><i class="fas fa-check-circle"></i> Dolce + Caffè</li>
+          </ul>
+          <div class="card-price">
+            <div class="price-main">€62</div>
+            <div class="price-note">a persona</div>
+          </div>
+        </div>
+        <button class="card-button" data-combo="chef">
+          <span>Scegli Questo</span>
+          <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Location Section -->
+<section id="location" class="location-section">
+  <div class="location-container">
+    <div class="location-info">
+      <h2>Vieni a <span class="gold-text">Trovarci</span></h2>
+      <div class="location-details">
+        <div class="detail-item">
+          <i class="fas fa-map-marker-alt"></i>
+          <div>
+            <h4>Indirizzo</h4>
+            <p>Via Riccardo Lombardi, 1<br>00030 Valle Martella (RM)</p>
+          </div>
+        </div>
+        <div class="detail-item">
+          <i class="fas fa-clock"></i>
+          <div>
+            <h4>Orari di Apertura</h4>
+            <p>Pranzo: 12:30 - 15:30<br>Cena: 18:30 - 23:00<br><em>Venerdì e Sabato fino alle 00:00</em></p>
+          </div>
+        </div>
+        <div class="detail-item">
+          <i class="fas fa-phone"></i>
+          <div>
+            <h4>Prenotazioni</h4>
+            <p>+39 347 432 9466<br>+39 06 6927 7987<br>+39 06 6928 0943</p>
+          </div>
+        </div>
+      </div>
+      <a href="https://maps.app.goo.gl/krswxMJfJtvFPN9j8" target="_blank" class="location-button">
+        <i class="fas fa-directions"></i>
+        <span>Ottieni Indicazioni</span>
+      </a>
+    </div>
+    <div class="location-map">
+      <iframe
+        src="https://maps.google.com/maps?q=Via+Riccardo+Lombardi+1+00030+Valle+Martella+RM+Italy&t=&z=15&ie=UTF8&iwloc=&output=embed"
+        width="100%" height="400" style="border:0;border-radius:var(--radius-lg);"
+        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        title="La Bontà Ristorante - Valle Martella"></iframe>
+      <a href="https://maps.app.goo.gl/krswxMJfJtvFPN9j8" target="_blank" class="map-link" style="display:inline-block;margin-top:1rem;">
+        <i class="fas fa-external-link-alt"></i> Vedi Mappa Completa
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Modal -->
+<div class="modal" id="comboModal">
+  <div class="modal-overlay"></div>
+  <div class="modal-container">
+    <div class="modal-content">
+      <button class="modal-close" id="modalClose">
+        <i class="fas fa-times"></i>
+      </button>
+      
+      <div class="modal-header">
+        <div class="modal-badge" id="modalBadge"></div>
+        <h2 id="modalTitle"></h2>
+        <p class="modal-subtitle" id="modalSubtitle"></p>
+      </div>
+      
+      <div class="modal-body">
+        <div class="modal-image" id="modalImage"></div>
+        
+        <div class="modal-details">
+          <div class="details-section">
+            <h3><i class="fas fa-info-circle"></i> Descrizione</h3>
+            <p id="modalDesc"></p>
+          </div>
+          
+          <div class="details-section" id="peopleSection" style="display: none;">
+            <h3><i class="fas fa-user-friends"></i> Numero di Persone</h3>
+            <div class="people-selector">
+              <button class="people-btn" id="decreasePeople">-</button>
+              <select id="peopleSelect" class="people-select">
+                <option value="3">3 persone</option>
+                <option value="4" selected>4 persone</option>
+                <option value="5">5 persone</option>
+                <option value="6">6 persone</option>
+                <option value="8">8 persone</option>
+              </select>
+              <button class="people-btn" id="increasePeople">+</button>
+            </div>
+          </div>
+          
+          <div class="details-section">
+            <h3><i class="fas fa-utensils"></i> Il Menu Include</h3>
+            <div class="menu-items" id="menuItems"></div>
+          </div>
+          
+          <!-- Customize Note -->
+          <div class="customize-note" id="customizeNote" style="display: none;">
+            <i class="fas fa-info-circle"></i>
+            <span>Se desideri modificare qualcosa nell'offerta come bevande o piatti, chiedi pure al cameriere.</span>
+          </div>
+          
+          <div class="total-section">
+            <div class="total-label">
+              <span>Totale</span>
+              <span id="totalPeople"></span>
+            </div>
+            <div class="total-value" id="modalTotal"></div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="modal-footer">
+        <button class="footer-btn secondary" id="closeModalBtn">
+          <i class="fas fa-times"></i>
+          Chiudi
+        </button>
+        <button class="footer-btn primary" id="reserveBtn">
+          <i class="fab fa-whatsapp"></i>
+          <span>Ordina Ora</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TIER 1: Photo Gallery -->
+<section id="gallery" class="gallery-section">
+  <div class="section-header">
+    <h2>La Nostra <span class="gold-text">Galleria</span></h2>
+    <p class="section-subtitle">Un viaggio visivo attraverso i sapori e l'atmosfera di La Bontà</p>
+  </div>
+  <div class="gallery-grid" id="galleryGrid">
+    <div class="gallery-item" data-index="0" style="background-image:url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&q=80&w=900')">
+      <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
+    </div>
+    <div class="gallery-item" data-index="1" style="background-image:url('https://images.unsplash.com/photo-1563379926898-05f4575a45d8?auto=format&fit=crop&q=80&w=900')">
+      <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
+    </div>
+    <div class="gallery-item" data-index="2" style="background-image:url('https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&q=80&w=900')">
+      <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
+    </div>
+    <div class="gallery-item" data-index="3" style="background-image:url('https://images.unsplash.com/photo-1559925393-8be0ec4767c8?auto=format&fit=crop&q=80&w=900')">
+      <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
+    </div>
+    <div class="gallery-item" data-index="4" style="background-image:url('https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&q=80&w=900')">
+      <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
+    </div>
+    <div class="gallery-item" data-index="5" style="background-image:url('https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?auto=format&fit=crop&q=80&w=900')">
+      <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
+    </div>
+    <div class="gallery-item" data-index="6" style="background-image:url('https://images.unsplash.com/photo-1626200419199-391ae4be7a41?auto=format&fit=crop&q=80&w=900')">
+      <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
+    </div>
+    <div class="gallery-item" data-index="7" style="background-image:url('https://images.unsplash.com/photo-1517248135467-2c7ed3ab7229?auto=format&fit=crop&q=80&w=900')">
+      <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
+    </div>
+    <div class="gallery-item" data-index="8" style="background-image:url('https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?auto=format&fit=crop&q=80&w=900')">
+      <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
+    </div>
+  </div>
+</section>
+
+<!-- TIER 1: Lightbox -->
+<div id="lightbox" class="lightbox" role="dialog" aria-label="Galleria foto" aria-hidden="true">
+  <div class="lightbox-overlay" id="lightboxOverlay"></div>
+  <div class="lightbox-content">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Chiudi"><i class="fas fa-times"></i></button>
+    <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Precedente"><i class="fas fa-chevron-left"></i></button>
+    <div class="lightbox-img" id="lightboxImg"></div>
+    <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Successiva"><i class="fas fa-chevron-right"></i></button>
+    <div class="lightbox-counter" id="lightboxCounter">1 / 9</div>
+  </div>
+</div>
+
+<!-- TIER 1: Reservation Modal -->
+<div id="reservationModal" class="t1-modal" role="dialog" aria-labelledby="resModalTitle" aria-hidden="true">
+  <div class="t1-modal-overlay" id="resModalOverlay"></div>
+  <div class="t1-modal-container">
+    <div class="t1-modal-content">
+      <button class="t1-modal-close" id="resModalClose" aria-label="Chiudi"><i class="fas fa-times"></i></button>
+      <div class="t1-modal-header">
+        <div class="t1-modal-icon"><i class="fas fa-calendar-check"></i></div>
+        <h2 id="resModalTitle">Prenota un Tavolo</h2>
+        <p>La Bontà Ristorante — Valle Martella</p>
+      </div>
+      <form id="reservationForm" class="reservation-form" novalidate>
+        <div class="res-row">
+          <div class="res-field">
+            <label for="resDate"><i class="fas fa-calendar"></i> Data *</label>
+            <input type="date" id="resDate" name="date" required autocomplete="off" />
+            <span class="field-error" id="resDateErr"></span>
+          </div>
+          <div class="res-field">
+            <label for="resTime"><i class="fas fa-clock"></i> Orario *</label>
+            <select id="resTime" name="time" required>
+              <option value="">— Scegli —</option>
+              <optgroup label="Pranzo">
+                <option value="12:30">12:30</option>
+                <option value="13:00">13:00</option>
+                <option value="13:30">13:30</option>
+                <option value="14:00">14:00</option>
+                <option value="14:30">14:30</option>
+                <option value="15:00">15:00</option>
+              </optgroup>
+              <optgroup label="Cena">
+                <option value="18:30">18:30</option>
+                <option value="19:00">19:00</option>
+                <option value="19:30">19:30</option>
+                <option value="20:00">20:00</option>
+                <option value="20:30">20:30</option>
+                <option value="21:00">21:00</option>
+                <option value="21:30">21:30</option>
+                <option value="22:00">22:00</option>
+              </optgroup>
+            </select>
+            <span class="field-error" id="resTimeErr"></span>
+          </div>
+        </div>
+        <div class="res-field">
+          <label><i class="fas fa-users"></i> Numero di Ospiti *</label>
+          <div class="guests-selector">
+            <button type="button" class="guests-btn" id="guestsDecrease" aria-label="Meno ospiti">−</button>
+            <div class="guests-display" id="guestsDisplay">2</div>
+            <button type="button" class="guests-btn" id="guestsIncrease" aria-label="Più ospiti">+</button>
+            <input type="hidden" id="resGuests" name="guests" value="2" />
+          </div>
+        </div>
+        <div class="res-row">
+          <div class="res-field">
+            <label for="resName"><i class="fas fa-user"></i> Nome *</label>
+            <input type="text" id="resName" name="name" placeholder="Il tuo nome" required autocomplete="name" />
+            <span class="field-error" id="resNameErr"></span>
+          </div>
+          <div class="res-field">
+            <label for="resPhone"><i class="fas fa-phone"></i> Telefono *</label>
+            <input type="tel" id="resPhone" name="phone" placeholder="+39 3XX XXX XXXX" required autocomplete="tel" />
+            <span class="field-error" id="resPhoneErr"></span>
+          </div>
+        </div>
+        <div class="res-field">
+          <label for="resEmail"><i class="fas fa-envelope"></i> Email <span class="optional">(opzionale)</span></label>
+          <input type="email" id="resEmail" name="email" placeholder="tua@email.com" autocomplete="email" />
+        </div>
+        <div class="res-field">
+          <label for="resNotes"><i class="fas fa-comment"></i> Richieste Speciali <span class="optional">(opzionale)</span></label>
+          <textarea id="resNotes" name="notes" rows="3" placeholder="Allergie, occasioni speciali, preferenze…"></textarea>
+        </div>
+        <div class="res-actions">
+          <button type="submit" class="res-submit-btn" id="resSubmitBtn">
+            <i class="fas fa-check-circle"></i>
+            <span>Prenota Ora</span>
+          </button>
+        </div>
+      </form>
+      <!-- Success state (hidden initially) -->
+      <div id="resSuccessState" class="res-success-state" style="display:none;">
+        <div class="res-success-icon"><i class="fas fa-check-circle"></i></div>
+        <h3>Prenotazione Inviata!</h3>
+        <p id="resSuccessDetails"></p>
+        <button class="res-whatsapp-btn" id="resWhatsAppConfirm">
+          <i class="fab fa-whatsapp"></i>
+          Conferma su WhatsApp
+        </button>
+        <button class="res-close-success" id="resCloseSuccess">Chiudi</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TIER 1: WhatsApp Mini Modal -->
+<div id="waModal" class="wa-modal" role="dialog" aria-label="WhatsApp" aria-hidden="true">
+  <div class="wa-modal-box">
+    <p class="wa-modal-title"><i class="fab fa-whatsapp"></i> Come possiamo aiutarti?</p>
+    <button class="wa-option-btn" id="waOptionReserve">
+      <i class="fas fa-calendar-check"></i>
+      Prenota un Tavolo
+    </button>
+    <button class="wa-option-btn" id="waOptionTakeaway">
+      <i class="fas fa-shopping-bag"></i>
+      Ordina da Asporto
+    </button>
+    <button class="wa-option-btn" id="waOptionInfo">
+      <i class="fas fa-info-circle"></i>
+      Info &amp; Domande
+    </button>
+    <button class="wa-modal-cancel" id="waModalCancel">Annulla</button>
+  </div>
+</div>
+
+<!-- TIER 1: Admin Dashboard -->
+<div id="adminPanel" class="admin-panel" style="display:none;" aria-label="Pannello amministratore">
+  <div class="admin-header">
+    <h2><i class="fas fa-shield-alt"></i> Pannello Prenotazioni</h2>
+    <div class="admin-actions">
+      <button class="admin-btn" id="adminExportCSV"><i class="fas fa-file-csv"></i> Esporta CSV</button>
+      <button class="admin-btn danger" id="adminClearAll"><i class="fas fa-trash"></i> Elimina Tutto</button>
+    </div>
+  </div>
+  <div class="admin-stats" id="adminStats"></div>
+  <div class="admin-table-wrapper">
+    <table class="admin-table" id="adminTable">
+      <thead>
+        <tr>
+          <th>Data</th><th>Orario</th><th>Ospiti</th><th>Nome</th>
+          <th>Telefono</th><th>Email</th><th>Note</th><th>Stato</th><th>Azioni</th>
+        </tr>
+      </thead>
+      <tbody id="adminTableBody"></tbody>
+    </table>
+    <p id="adminEmpty" class="admin-empty" style="display:none;">Nessuna prenotazione salvata.</p>
+  </div>
+</div>
+
+<!-- TIER 1: Toast Notification -->
+<div id="toast" class="toast" role="alert" aria-live="polite"></div>
+
+<!-- TIER 1: Reservation FAB (bottom-right) -->
+<button class="fab-reserve" id="fabReserve" aria-label="Prenota un tavolo">
+  <i class="fas fa-calendar-check"></i>
+  <span>Prenota</span>
+</button>
+
+<!-- TIER 1: WhatsApp FAB (bottom-left) -->
+<button class="fab-whatsapp" id="fabWhatsApp" aria-label="Contattaci su WhatsApp">
+  <i class="fab fa-whatsapp"></i>
+</button>
+
+<!-- Footer -->
+<footer id="contatti" class="footer">
+  <div class="footer-content">
+    <div class="footer-section">
+      <h3 class="footer-logo">La Bontà</h3>
+      <p class="footer-tagline">Ristorante Italiano<br>Valle Martella</p>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/la_bonta_ristorante/" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/labontaristorante/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.tripadvisor.com/Restaurant_Review-g17219827-d25438184-Reviews-La_bonta-Valle_Martella_Province_of_Rome_Lazio.html" target="_blank"><i class="fab fa-tripadvisor"></i></a>
+      </div>
+    </div>
+    
+    <div class="footer-section">
+      <h4>Contatti</h4>
+      <p><i class="fas fa-map-marker-alt"></i> Via Riccardo Lombardi, 1, Valle Martella (RM)</p>
+      <p><i class="fas fa-phone"></i> +39 347 432 9466</p>
+      <p><i class="fas fa-globe"></i> <a href="https://www.labontaristorante.com" target="_blank">labontaristorante.com</a></p>
+    </div>
+    
+    <div class="footer-section">
+      <h4>Orari</h4>
+      <p><strong>Pranzo:</strong> 12:30 - 15:30</p>
+      <p><strong>Cena:</strong> 18:30 - 23:00</p>
+      <p><em>Aperto tutti i giorni</em></p>
+    </div>
+  </div>
+  
+  <div class="footer-bottom">
+    <p>© 2026 La Bontà Ristorante. Tutti i diritti riservati.</p>
+    <p class="footer-credits">
+      Made with <i class="fas fa-heart"></i> in Valle Martella
+    </p>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
