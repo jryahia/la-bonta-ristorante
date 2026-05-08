@@ -176,7 +176,7 @@ const translations = {
     sectionTitleHighlight: "Menu",
     sectionSubtitle: "Clicca sulle icone per scoprire le nostre categorie culinarie",
     combosTitle: "I Nostri",
-    combosTitleHighlight: "Menu",
+    combosTitleHighlight: "Menu Speciali",
     combosSubtitle: "Esperienze complete curate dai nostri chef",
     viewDetails: "Vedi Menu",
     viewMenu: "Vedi Menu",
@@ -828,10 +828,11 @@ function openModal() {
 function closeModal() {
   const container = document.querySelector('.modal-container');
   if (container) container.style.animation = 'slideUp 0.5s ease-out reverse';
-  
+
   setTimeout(() => {
     if (modal) modal.style.display = 'none';
     document.body.style.overflow = 'auto';
+    reapplyLangActive();
   }, 500);
 }
 
@@ -940,6 +941,14 @@ function updateLanguage() {
   }
 }
 
+function reapplyLangActive() {
+  document.querySelectorAll('.lang-switch button').forEach(b => {
+    const isActive = b.dataset.lang === currentLang;
+    b.classList.toggle('active', isActive);
+    b.setAttribute('aria-pressed', String(isActive));
+  });
+}
+
 // Scroll animations
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -987,10 +996,12 @@ function setDateConstraints() {
   const dateInput = document.getElementById('resDate');
   if (!dateInput) return;
   const today = new Date();
+  const tomorrow = new Date();
+  tomorrow.setDate(today.getDate() + 1);
   const maxDate = new Date();
   maxDate.setDate(today.getDate() + 30);
   const fmt = d => d.toISOString().split('T')[0];
-  dateInput.min = fmt(today);
+  dateInput.min = fmt(tomorrow);
   dateInput.max = fmt(maxDate);
 }
 
@@ -1011,21 +1022,25 @@ function setDateConstraints() {
   }, { threshold: 0.1 });
   heroObserver.observe(hero);
 
-  /* Active section highlight */
+  /* Active section highlight — track all visible sections, activate the topmost */
   const sectionEls = sectionIds
     .map(id => document.getElementById(id))
     .filter(Boolean);
 
+  const activeSections = new Set();
   const sectionObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        const id = entry.target.id;
-        navLinks.forEach(a => {
-          a.classList.toggle('active', a.getAttribute('href') === `#${id}`);
-        });
+        activeSections.add(entry.target.id);
+      } else {
+        activeSections.delete(entry.target.id);
       }
     });
-  }, { threshold: 0.3, rootMargin: '-60px 0px -40% 0px' });
+    const activeId = sectionIds.find(id => activeSections.has(id)) || '';
+    navLinks.forEach(a => {
+      a.classList.toggle('active', !!activeId && a.getAttribute('href') === `#${activeId}`);
+    });
+  }, { threshold: 0.15, rootMargin: '-80px 0px -30% 0px' });
 
   sectionEls.forEach(el => sectionObserver.observe(el));
 
@@ -1105,6 +1120,7 @@ function setDateConstraints() {
     lightbox.classList.remove('open');
     lightbox.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
+    reapplyLangActive();
   }
 
   function updateLightbox() {
@@ -1180,6 +1196,7 @@ function setDateConstraints() {
     modal.classList.remove('open');
     modal.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
+    reapplyLangActive();
   }
 
   /* Expose globally so other features can call it */
@@ -1483,3 +1500,12 @@ function refreshAdmin() {
 
 /* Make combos accessible from WhatsApp handler */
 window.combos = window.combos || (typeof combos !== 'undefined' ? combos : {});
+
+/* Contatti section WhatsApp button */
+const contattiWaBtn = document.getElementById('contattiWaBtn');
+if (contattiWaBtn) {
+  contattiWaBtn.addEventListener('click', () => {
+    const waModal = document.getElementById('waModal');
+    if (waModal) waModal.classList.toggle('open');
+  });
+}
