@@ -1,780 +1,1856 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="description" content="La Bontà Ristorante - Ristorante Italiano a Valle Martella. Pesce fresco, pizza al forno a legna, pasta fatta in casa." />
-  <meta name="theme-color" content="#c9a14a" />
-  <title>La Bontà Ristorante | Valle Martella</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="La Bontà Ristorante — Autentica cucina italiana a Valle Martella, Roma. Antipasti, primi, secondi, pizza, dolci e menu speciali. Prenota ora.">
+<meta name="theme-color" content="#0A0A0A">
+<title>La Bontà Ristorante — Cucina Italiana a Valle Martella</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>
+/* ===== RESET & BASE ===== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Playfair Display',Georgia,serif;background:#0A0A0A;color:#F5F5F0;overflow-x:hidden;line-height:1.6}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;font-family:inherit;border:none;background:none;color:inherit}
+input,textarea,select{font-family:inherit;font-size:inherit}
+ul{list-style:none}
+
+/* ===== PREFERS REDUCED MOTION ===== */
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important}}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar{width:8px}
+::-webkit-scrollbar-track{background:#0A0A0A}
+::-webkit-scrollbar-thumb{background:#C9A14A;border-radius:4px}
+::-webkit-scrollbar-thumb:hover{background:#b8922f}
+
+/* ===== CSS VARIABLES ===== */
+:root{--gold:#C9A14A;--gold-light:#e0be6a;--gold-dark:#a07e30;--bg:#0A0A0A;--surface:#121212;--card:#1a1a1a;--text:#F5F5F0;--text-muted:#999;--border:rgba(255,255,255,0.06);--glass:rgba(18,18,18,0.85);--glass-border:rgba(201,161,74,0.15);--radius:16px;--shadow:0 8px 32px rgba(0,0,0,0.4)}
+
+/* ===== REVEAL ANIMATION ===== */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity 0.8s cubic-bezier(0.4,0,0.2,1),transform 0.8s cubic-bezier(0.4,0,0.2,1)}.reveal.visible{opacity:1;transform:translateY(0)}.reveal-d1{transition-delay:0.1s}.reveal-d2{transition-delay:0.2s}.reveal-d3{transition-delay:0.3s}.reveal-d4{transition-delay:0.4s}
+
+/* ===== GOLD SPARKLE OVERLAY ===== */
+.gold-sparkle{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;overflow:hidden}
+.gold-sparkle span{position:absolute;display:block;background:#C9A14A;border-radius:50%;animation:sparkle linear infinite;opacity:0}
+@keyframes sparkle{0%{opacity:0;transform:translateY(100vh) scale(0)}50%{opacity:0.4;transform:translateY(50vh) scale(1)}100%{opacity:0;transform:translateY(-10vh) scale(0)}}
+
+/* ===== UTILITY ===== */
+.gradient-text{background:linear-gradient(135deg,#C9A14A,#e0be6a,#C9A14A);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.section{position:relative;padding:100px 24px;max-width:1280px;margin:0 auto}
+.section-header{text-align:center;margin-bottom:60px}
+.section-header h2{font-family:Cinzel,serif;font-size:42px;font-weight:700;letter-spacing:2px;margin-bottom:12px}
+.section-header p{color:#999;font-size:16px;font-style:italic;max-width:600px;margin:0 auto}
+.section-divider{width:60px;height:2px;background:linear-gradient(90deg,transparent,#C9A14A,transparent);margin:16px auto}
+
+/* ===== GLASS CARD ===== */
+.glass-card{background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--glass-border);border-radius:var(--radius);padding:28px;transition:transform 0.4s ease,box-shadow 0.4s ease}
+.glass-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(201,161,74,0.1)}
+
+/* ===== SPLASH SCREEN ===== */
+#splash{position:fixed;top:0;left:0;width:100%;height:100%;z-index:10000;background:#0A0A0A;display:flex;align-items:center;justify-content:center;transition:opacity 0.8s ease}
+#splash.hidden{opacity:0;pointer-events:none}
+.splash-content{text-align:center}
+.splash-logo{font-family:Cinzel,serif;font-size:64px;font-weight:700;background:linear-gradient(135deg,#C9A14A,#e0be6a,#F5F5F0,#C9A14A);background-size:300% 300%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:splashGlow 2s ease-in-out;letter-spacing:6px}
+@keyframes splashGlow{0%{background-position:0% 50%;opacity:0;transform:scale(0.8)}50%{opacity:1;transform:scale(1.02)}100%{background-position:100% 50%;opacity:1;transform:scale(1)}}
+.splash-sub{font-size:18px;color:#999;margin-top:8px;font-style:italic;opacity:0;animation:fadeIn 1s 0.5s forwards}
+.splash-utensils{font-size:28px;color:rgba(201,161,74,0.5);margin-top:16px;animation:splashBounce 1.4s ease-in-out infinite}
+@keyframes splashBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes fadeIn{to{opacity:1}}
+
+/* ===== HEADER ===== */
+#header{position:fixed;top:0;left:0;width:100%;z-index:9999;padding:12px 24px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,10,10,0.8);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(201,161,74,0.1);transition:transform 0.3s ease}
+#header.hidden{transform:translateY(-100%)}
+.header-left{display:flex;align-items:center;gap:16px}
+.header-logo{font-family:Cinzel,serif;font-size:22px;font-weight:700;background:linear-gradient(135deg,#C9A14A,#e0be6a);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.header-logo i{display:none}
+.header-right{display:flex;align-items:center;gap:12px}
+.lang-btn{font-size:13px;padding:6px 10px;border-radius:6px;border:1px solid rgba(255,255,255,0.1);background:transparent;color:#999;transition:all 0.3s;font-family:'Playfair Display',serif;min-width:34px;text-align:center}
+.lang-btn.active{background:rgba(201,161,74,0.15);border-color:#C9A14A;color:#C9A14A}
+.lang-btn:hover{color:#F5F5F0;border-color:rgba(255,255,255,0.3)}
+.header-phone{display:flex;align-items:center;gap:6px;color:#C9A14A;font-size:14px;font-weight:500;padding:8px 14px;border:1px solid rgba(201,161,74,0.25);border-radius:8px;transition:all 0.3s}
+.header-phone:hover{background:rgba(201,161,74,0.1)}
+
+/* ===== HERO DECORATIVE ICONS ===== */
+.hero-deco{position:absolute;z-index:0;pointer-events:none;opacity:0.06;font-size:120px;color:#C9A14A}
+.hero-deco-1{top:12%;left:5%;animation:floatSlow 8s ease-in-out infinite}
+.hero-deco-2{bottom:20%;right:6%;animation:floatSlow 10s ease-in-out infinite 1s}
+.hero-deco-3{top:35%;right:12%;animation:floatSlow 12s ease-in-out infinite 2s;font-size:80px}
+@keyframes floatSlow{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+
+/* ===== THREE.JS CANVAS CONTAINER ===== */
+#three-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+
+/* ===== STICKY NAV ===== */
+#sticky-nav{position:fixed;top:0;left:0;width:100%;z-index:9998;background:rgba(10,10,10,0.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(201,161,74,0.08);transform:translateY(-100%);transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between}
+#sticky-nav.visible{transform:translateY(0)}
+.sticky-logo{font-family:Cinzel,serif;font-size:18px;font-weight:700;color:#C9A14A}
+.sticky-links{display:flex;gap:28px;align-items:center}
+.sticky-links a{font-size:13px;font-family:'Playfair Display',serif;color:#999;position:relative;padding:4px 0;transition:color 0.3s;letter-spacing:1px}
+.sticky-links a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:#C9A14A;transition:width 0.3s}
+.sticky-links a:hover,.sticky-links a.active{color:#C9A14A}
+.sticky-links a:hover::after,.sticky-links a.active::after{width:100%}
+.nav-hamburger{display:none;background:none;border:none;color:#F5F5F0;font-size:22px;cursor:pointer;padding:8px 4px}
+
+/* ===== MOBILE DRAWER ===== */
+#mobile-drawer{position:fixed;top:0;right:-300px;width:300px;height:100%;z-index:9997;background:#0A0A0A;border-left:1px solid rgba(201,161,74,0.08);padding:80px 32px 32px;transition:right 0.4s cubic-bezier(0.4,0,0.2,1);overflow-y:auto}
+#mobile-drawer.open{right:0}
+#drawer-overlay{position:fixed;top:0;left:0;width:100%;height:100%;z-index:9996;background:rgba(0,0,0,0.6);opacity:0;pointer-events:none;transition:opacity 0.4s}
+#drawer-overlay.open{opacity:1;pointer-events:auto}
+.drawer-close{position:absolute;top:20px;right:20px;font-size:24px;color:#999;background:none;border:none;cursor:pointer}
+.drawer-links{display:flex;flex-direction:column;gap:20px}
+.drawer-links a{font-size:18px;color:#999;font-family:Cinzel,serif;letter-spacing:1px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);transition:color 0.3s}
+.drawer-links a:hover{color:#C9A14A}
+
+/* ===== HERO ===== */
+#hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:120px 24px 80px;z-index:1;text-align:center}
+.hero-content{max-width:900px;position:relative}
+.hero-badge{display:inline-block;padding:8px 20px;border:1px solid rgba(201,161,74,0.3);border-radius:50px;font-size:12px;letter-spacing:2px;color:#C9A14A;margin-bottom:24px;text-transform:uppercase;font-family:Cinzel,serif}
+.hero-title{font-family:Cinzel,serif;font-size:clamp(36px,8vw,80px);font-weight:700;letter-spacing:4px;line-height:1.1;margin-bottom:16px}
+.hero-title .gradient-text{display:block}
+.hero-subtitle{font-size:clamp(16px,2.5vw,22px);color:#999;font-style:italic;margin-bottom:48px;max-width:600px;margin-left:auto;margin-right:auto}
+.hero-info-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;max-width:800px;margin:0 auto 48px}
+.hero-info-card{background:var(--glass);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(201,161,74,0.1);border-radius:12px;padding:20px 16px;text-align:center;transition:all 0.3s}
+.hero-info-card:hover{border-color:rgba(201,161,74,0.3);transform:translateY(-2px)}
+.hero-info-card i{color:#C9A14A;font-size:22px;margin-bottom:8px}
+.hero-info-card h4{font-family:Cinzel,serif;font-size:12px;letter-spacing:1px;color:#999;margin-bottom:4px}
+.hero-info-card p{font-size:13px;line-height:1.4;color:#F5F5F0}
+.hero-info-card .stars{color:#C9A14A;font-size:14px;letter-spacing:2px}
+.hero-cta{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:50px;font-size:15px;font-weight:600;font-family:Cinzel,serif;letter-spacing:1px;transition:all 0.3s ease;border:1px solid transparent}
+.btn-primary{background:linear-gradient(135deg,#C9A14A,#b8922f);color:#0A0A0A}
+.btn-primary:hover{background:linear-gradient(135deg,#e0be6a,#C9A14A);transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,161,74,0.25)}
+.btn-outline{border-color:#C9A14A;color:#C9A14A;background:transparent}
+.btn-outline:hover{background:rgba(201,161,74,0.1);transform:translateY(-2px)}
+.scroll-indicator{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);animation:bounce 2s infinite;color:#C9A14A;font-size:24px;opacity:0.6}
+@keyframes bounce{0%,20%,50%,80%,100%{transform:translateX(-50%) translateY(0)}40%{transform:translateX(-50%) translateY(-10px)}60%{transform:translateX(-50%) translateY(-5px)}}
+
+/* ===== CIRCLE INTERACTIVE MENU ===== */
+#menu-circle-section{padding:100px 24px;position:relative;z-index:1}
+.menu-circle-wrapper{position:relative;width:400px;height:400px;margin:0 auto 60px}
+@media(max-width:480px){.menu-circle-wrapper{width:320px;height:320px}}
+.menu-circle{position:relative;width:100%;height:100%;border-radius:50%;border:1px solid rgba(201,161,74,0.15);animation:circleRotate 40s linear infinite;transition:animation-play-state 0.3s}
+.menu-circle.paused{animation-play-state:paused}
+@keyframes circleRotate{100%{transform:rotate(360deg)}}
+.menu-circle-item{position:absolute;width:80px;height:80px;left:calc(50% - 40px);top:calc(50% - 40px);border-radius:50%;background:var(--card);border:1px solid rgba(201,161,74,0.15);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;transition:all 0.4s;box-shadow:0 4px 16px rgba(0,0,0,0.3)}
+.menu-circle-item:hover{background:#1a1a1a;border-color:#C9A14A;transform:scale(1.1)!important;box-shadow:0 0 30px rgba(201,161,74,0.15)}
+.menu-circle-item i{font-size:22px;color:#C9A14A}
+.menu-circle-item span{font-size:9px;font-family:Cinzel,serif;color:#999;letter-spacing:0.5px;text-align:center}
+.menu-circle-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:110px;height:110px;border-radius:50%;background:var(--glass);backdrop-filter:blur(12px);border:1px solid var(--glass-border);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:2;cursor:pointer;transition:all 0.3s}
+.menu-circle-center:hover{border-color:#C9A14A}
+.menu-circle-center span{font-family:Cinzel,serif;font-size:10px;color:#C9A14A;letter-spacing:1px}
+.menu-circle-center .toggle-btn{background:none;border:none;color:#999;font-size:14px;cursor:pointer;margin-top:2px;transition:color 0.3s}
+.menu-circle-center .toggle-btn:hover{color:#C9A14A}
+@media(max-width:480px){.menu-circle-item{width:64px;height:64px;left:calc(50% - 32px);top:calc(50% - 32px)}.menu-circle-item i{font-size:18px}.menu-circle-item span{font-size:8px}.menu-circle-center{width:90px;height:90px}}
+
+/* ===== CIRCLE SIDE PANEL ===== */
+#circle-side-panel{max-width:500px;margin:0 auto;background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--glass-border);border-radius:var(--radius);padding:32px;display:none;animation:panelSlide 0.4s ease}
+@keyframes panelSlide{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+#circle-side-panel.visible{display:block}
+.side-panel-title{font-family:Cinzel,serif;font-size:24px;color:#C9A14A;margin-bottom:4px}
+.side-panel-badge{display:inline-block;padding:4px 12px;border-radius:50px;font-size:11px;background:rgba(201,161,74,0.12);color:#C9A14A;font-family:Cinzel,serif;letter-spacing:1px;margin-bottom:8px}
+.side-panel-desc{color:#999;font-size:14px;font-style:italic;margin-bottom:8px;line-height:1.5}
+.side-panel-price{color:#F5F5F0;font-size:18px;margin-bottom:20px}
+.side-panel-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border-radius:50px;background:linear-gradient(135deg,#C9A14A,#b8922f);color:#0A0A0A;font-family:Cinzel,serif;font-size:13px;letter-spacing:1px;font-weight:600;transition:all 0.3s}
+.side-panel-btn:hover{background:linear-gradient(135deg,#e0be6a,#C9A14A);transform:translateY(-2px)}
+
+/* ===== MENU MODAL (full dish list) ===== */
+.menu-modal .dish-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.menu-modal .dish-card{background:var(--card);border:1px solid rgba(255,255,255,0.04);border-radius:12px;padding:20px;display:flex;flex-direction:column;align-items:center;text-align:center;transition:all 0.3s;cursor:pointer;overflow:hidden}
+.menu-modal .dish-card:hover{border-color:rgba(201,161,74,0.2);transform:translateY(-2px)}
+.menu-modal .dish-img{width:72px;height:72px;border-radius:50%;object-fit:cover;margin-bottom:12px;border:2px solid rgba(201,161,74,0.15);transition:transform 0.5s ease,border-color 0.3s}
+.menu-modal .dish-card:hover .dish-img{transform:scale(1.15);border-color:#C9A14A}
+.menu-modal .dish-name{font-family:Cinzel,serif;font-size:15px;color:#F5F5F0;margin-bottom:4px}
+.menu-modal .dish-price{color:#C9A14A;font-size:18px;font-weight:700}
+.menu-modal .dish-desc{color:#666;font-size:12px;margin-top:4px;font-style:italic}
+.menu-modal .dish-placeholder{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,rgba(201,161,74,0.1),rgba(255,255,255,0.02));margin-bottom:12px;display:flex;align-items:center;justify-content:center;font-size:28px;color:#C9A14A;border:2px solid rgba(201,161,74,0.15)}
+
+/* ===== MODAL BASE ===== */
+.modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;z-index:10001;background:rgba(0,0,0,0.75);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.4s;padding:24px;backdrop-filter:blur(4px)}
+.modal-overlay.active{opacity:1;pointer-events:auto}
+.modal{max-width:720px;width:100%;max-height:85vh;overflow-y:auto;background:#111;border:1px solid var(--glass-border);border-radius:20px;padding:40px 32px;position:relative;transform:scale(0.95);transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);scrollbar-width:thin}
+.modal-overlay.active .modal{transform:scale(1)}
+.modal-close{position:absolute;top:16px;right:20px;font-size:24px;color:#999;background:none;border:none;cursor:pointer;transition:color 0.3s;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%}
+.modal-close:hover{color:#fff;background:rgba(255,255,255,0.05)}
+.modal h3{font-family:Cinzel,serif;font-size:28px;margin-bottom:20px;text-align:center}
+.modal{padding:36px 28px}
+@media(max-width:480px){.modal{padding:24px 16px;max-height:90vh}.modal h3{font-size:22px}}
+
+/* ===== COMBO GRID ===== */
+#combo-section{padding:100px 24px;position:relative;z-index:1}
+.combo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;max-width:1200px;margin:0 auto}
+.combo-card{background:var(--card);border:1px solid rgba(201,161,74,0.08);border-radius:var(--radius);overflow:hidden;position:relative;transition:all 0.4s;display:flex;flex-direction:column}
+.combo-card:hover{transform:translateY(-6px);border-color:rgba(201,161,74,0.2);box-shadow:0 20px 60px rgba(0,0,0,0.5)}
+.combo-ribbon{position:absolute;top:16px;left:-32px;background:linear-gradient(135deg,#C9A14A,#b8922f);color:#0A0A0A;padding:4px 36px;font-family:Cinzel,serif;font-size:10px;letter-spacing:1px;font-weight:700;transform:rotate(-45deg);z-index:2;text-transform:uppercase}
+.combo-img{height:160px;background-size:cover;background-position:center;position:relative;display:flex;align-items:flex-end;padding:16px}
+.combo-img::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:60%;background:linear-gradient(transparent,rgba(10,10,10,0.95))}
+.combo-img h4{position:relative;z-index:1;font-family:Cinzel,serif;font-size:18px;color:#C9A14A}
+.combo-body{padding:20px;flex:1;display:flex;flex-direction:column}
+.combo-features{list-style:none;margin-bottom:16px;flex:1}
+.combo-features li{padding:6px 0;font-size:13px;color:#bbb;border-bottom:1px solid rgba(255,255,255,0.04)}
+.combo-features li:last-child{border-bottom:none}
+.combo-features li::before{content:'• ';color:#C9A14A}
+.combo-price{font-family:Cinzel,serif;font-size:24px;color:#C9A14A;margin-bottom:12px;letter-spacing:1px}
+.combo-price small{font-size:13px;color:#666;font-family:'Playfair Display',serif}
+.combo-btn{width:100%;padding:12px;border-radius:50px;background:linear-gradient(135deg,#C9A14A,#b8922f);color:#0A0A0A;font-family:Cinzel,serif;font-size:13px;letter-spacing:1px;font-weight:600;transition:all 0.3s}
+.combo-btn:hover{background:linear-gradient(135deg,#e0be6a,#C9A14A)}
+
+/* ===== COMBO MODAL DETAILS ===== */
+.combo-modal-detail .detail-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:14px}
+.combo-modal-detail .detail-row:last-child{border-bottom:none}
+.combo-modal-detail .detail-label{color:#999}
+.combo-modal-detail .detail-value{color:#F5F5F0}
+.combo-modal-detail .detail-value .fa-check{color:#22c55e;margin-right:4px}
+.combo-people-selector{display:flex;align-items:center;gap:16px;justify-content:center;margin:20px 0}
+.combo-people-selector button{width:40px;height:40px;border-radius:50%;border:1px solid rgba(201,161,74,0.2);background:transparent;color:#C9A14A;font-size:18px;display:flex;align-items:center;justify-content:center;transition:all 0.3s}
+.combo-people-selector button:hover{background:rgba(201,161,74,0.1)}
+.combo-people-selector span{font-size:20px;min-width:30px;text-align:center;color:#F5F5F0;font-family:Cinzel,serif}
+.combo-total{text-align:center;font-family:Cinzel,serif;font-size:28px;color:#C9A14A;margin:16px 0}
+.combo-total small{font-size:14px;color:#666}
+.combo-note-textarea{width:100%;padding:12px;border-radius:8px;background:var(--card);border:1px solid rgba(255,255,255,0.06);color:#F5F5F0;resize:vertical;min-height:60px;margin:12px 0;font-size:13px}
+.combo-note-textarea::placeholder{color:#555}
+.combo-wa-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:14px;border-radius:50px;background:#25D366;color:#fff;font-family:Cinzel,serif;font-size:14px;letter-spacing:1px;font-weight:600;transition:all 0.3s;width:100%;margin-top:12px}
+.combo-wa-btn:hover{background:#1ebe5c;transform:translateY(-2px)}
+
+/* ===== GALLERY ===== */
+#gallery{padding:100px 24px;position:relative;z-index:1}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:1000px;margin:0 auto}
+.gallery-item{position:relative;overflow:hidden;border-radius:12px;cursor:pointer;aspect-ratio:1;background:var(--card)}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease}
+.gallery-item:hover img{transform:scale(1.1)}
+.gallery-item .gallery-overlay{position:absolute;inset:0;background:rgba(0,0,0,0.4);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 0.4s;font-size:32px;color:#C9A14A}
+.gallery-item:hover .gallery-overlay{opacity:1}
+.gallery-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:48px;color:rgba(201,161,74,0.2);background:linear-gradient(135deg,rgba(201,161,74,0.05),transparent)}
+@media(max-width:768px){.gallery-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.gallery-grid{grid-template-columns:1fr 1fr}}
+
+/* ===== LIGHTBOX ===== */
+#lightbox{position:fixed;top:0;left:0;width:100%;height:100%;z-index:10002;background:rgba(0,0,0,0.92);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.4s;padding:24px}
+#lightbox.active{opacity:1;pointer-events:auto}
+#lightbox img{max-width:90vw;max-height:85vh;object-fit:contain;border-radius:8px;border:1px solid rgba(255,255,255,0.06)}
+.lb-close{position:absolute;top:20px;right:24px;font-size:32px;color:#fff;background:none;border:none;cursor:pointer;z-index:3;opacity:0.7;transition:opacity 0.3s}
+.lb-close:hover{opacity:1}
+.lb-prev,.lb-next{position:absolute;top:50%;transform:translateY(-50%);font-size:36px;color:#fff;background:none;border:none;cursor:pointer;opacity:0.6;transition:opacity 0.3s;padding:16px;z-index:3}
+.lb-prev:hover,.lb-next:hover{opacity:1}
+.lb-prev{left:8px}
+.lb-next{right:8px}
+.lb-counter{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);color:#999;font-size:14px;font-family:Cinzel,serif;letter-spacing:2px}
+
+/* ===== LOCATION ===== */
+#location{padding:100px 24px;position:relative;z-index:1}
+.location-wrapper{display:grid;grid-template-columns:1fr 1fr;gap:40px;max-width:1200px;margin:0 auto;align-items:start}
+.location-info{display:flex;flex-direction:column;gap:24px}
+.location-card-detail{background:var(--glass);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--glass-border);border-radius:var(--radius);padding:24px}
+.location-card-detail h4{font-family:Cinzel,serif;font-size:14px;color:#C9A14A;letter-spacing:1px;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.location-card-detail p{font-size:14px;color:#bbb;line-height:1.6}
+.location-card-detail .hours-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.location-card-detail .hours-grid span{font-size:13px;color:#999}
+.location-card-detail .hours-grid .hours-val{color:#F5F5F0;text-align:right}
+.location-map-frame{border-radius:var(--radius);overflow:hidden;border:1px solid rgba(201,161,74,0.08)}
+.location-map-frame iframe{width:100%;height:400px;border:none;display:block}
+.location-map-link{display:inline-flex;align-items:center;gap:8px;margin-top:12px;color:#C9A14A;font-size:13px;font-family:Cinzel,serif;letter-spacing:1px;transition:gap 0.3s}
+.location-map-link:hover{gap:12px}
+@media(max-width:768px){.location-wrapper{grid-template-columns:1fr}}
+
+/* ===== RESERVATION MODAL ===== */
+.reserve-form{display:flex;flex-direction:column;gap:16px}
+.reserve-form .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.reserve-form .form-group{display:flex;flex-direction:column;gap:6px}
+.reserve-form label{font-size:12px;font-family:Cinzel,serif;letter-spacing:1px;color:#999}
+.reserve-form input,.reserve-form select,.reserve-form textarea{padding:12px 14px;border-radius:8px;background:var(--card);border:1px solid rgba(255,255,255,0.06);color:#F5F5F0;font-size:14px;transition:border-color 0.3s;width:100%}
+.reserve-form input:focus,.reserve-form select:focus,.reserve-form textarea:focus{outline:none;border-color:#C9A14A}
+.reserve-form textarea{resize:vertical;min-height:60px}
+.reserve-form .people-toggle{display:flex;align-items:center;gap:16px}
+.reserve-form .people-toggle button{width:40px;height:40px;border-radius:50%;border:1px solid rgba(201,161,74,0.2);background:transparent;color:#C9A14A;font-size:18px;transition:all 0.3s;display:flex;align-items:center;justify-content:center}
+.reserve-form .people-toggle button:hover{background:rgba(201,161,74,0.1)}
+.reserve-form .people-toggle span{font-size:18px;min-width:30px;text-align:center}
+.reserve-btn{width:100%;padding:14px;border-radius:50px;background:linear-gradient(135deg,#C9A14A,#b8922f);color:#0A0A0A;font-family:Cinzel,serif;font-size:14px;letter-spacing:1px;font-weight:600;transition:all 0.3s}
+.reserve-btn:hover{background:linear-gradient(135deg,#e0be6a,#C9A14A);transform:translateY(-2px)}
+.reserve-success{text-align:center;padding:24px;display:none}
+.reserve-success.show{display:block}
+.reserve-success i{font-size:48px;color:#22c55e;margin-bottom:12px}
+.reserve-success h4{font-family:Cinzel,serif;font-size:20px;color:#C9A14A;margin-bottom:8px}
+.reserve-success p{color:#999;margin-bottom:16px}
+.reserve-success .wa-confirm{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:50px;background:#25D366;color:#fff;font-family:Cinzel,serif;font-size:13px;letter-spacing:1px;font-weight:600;transition:all 0.3s}
+.reserve-success .wa-confirm:hover{background:#1ebe5c;transform:translateY(-2px)}
+
+/* ===== WHATSAPP FAB ===== */
+#wa-fab{position:fixed;bottom:24px;left:24px;z-index:9995;display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+.wa-fab-btn{width:56px;height:56px;border-radius:50%;background:#25D366;color:#fff;border:none;font-size:28px;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 20px rgba(37,211,102,0.35);transition:all 0.3s;position:relative}
+.wa-fab-btn:hover{transform:scale(1.1);box-shadow:0 6px 28px rgba(37,211,102,0.45)}
+#wa-menu{background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--glass-border);border-radius:16px;padding:12px;display:none;flex-direction:column;gap:4px;min-width:220px;box-shadow:0 8px 32px rgba(0,0,0,0.5)}
+#wa-menu.open{display:flex}
+.wa-menu-item{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:8px;font-size:13px;color:#F5F5F0;cursor:pointer;transition:all 0.2s;background:none;border:none;width:100%;text-align:left}
+.wa-menu-item i{font-size:18px;color:#25D366;width:24px}
+.wa-menu-item:hover{background:rgba(37,211,102,0.08)}
+@media(max-width:480px){.wa-fab-btn{width:50px;height:50px;font-size:24px}}
+
+/* ===== CONTATTI SECTION ===== */
+#contatti{padding:100px 24px;position:relative;z-index:1}
+.contatti-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;max-width:1100px;margin:0 auto}
+.contatti-card{background:var(--glass);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--glass-border);border-radius:var(--radius);padding:32px 24px;text-align:center;transition:all 0.3s}
+.contatti-card:hover{border-color:rgba(201,161,74,0.25);transform:translateY(-4px)}
+.contatti-card i{font-size:32px;color:#C9A14A;margin-bottom:16px}
+.contatti-card h4{font-family:Cinzel,serif;font-size:16px;color:#C9A14A;letter-spacing:1px;margin-bottom:12px}
+.contatti-card p{font-size:14px;color:#bbb;margin-bottom:4px}
+.contatti-card a{color:#C9A14A;transition:color 0.3s}
+.contatti-card a:hover{color:#e0be6a}
+.contatti-card .social-links{display:flex;justify-content:center;gap:16px;margin-top:12px}
+.contatti-card .social-links a{width:44px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid rgba(201,161,74,0.15);color:#C9A14A;font-size:20px;transition:all 0.3s}
+.contatti-card .social-links a:hover{background:rgba(201,161,74,0.1);border-color:#C9A14A;transform:translateY(-2px)}
+.wa-cta{display:inline-flex;align-items:center;gap:10px;padding:14px 32px;border-radius:50px;background:#25D366;color:#fff;font-family:Cinzel,serif;font-size:14px;letter-spacing:1px;font-weight:600;transition:all 0.3s;margin-top:20px}
+.wa-cta:hover{background:#1ebe5c;transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,211,102,0.3)}
+
+/* ===== FOOTER ===== */
+#footer{position:relative;z-index:1;background:#0a0a0a;border-top:1px solid rgba(201,161,74,0.08);padding:60px 24px 24px}
+.footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:40px;max-width:1200px;margin:0 auto}
+.footer-col h4{font-family:Cinzel,serif;font-size:14px;color:#C9A14A;letter-spacing:2px;margin-bottom:16px}
+.footer-logo{font-family:Cinzel,serif;font-size:24px;font-weight:700;background:linear-gradient(135deg,#C9A14A,#e0be6a);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px}
+.footer-tagline{font-style:italic;color:#777;font-size:14px;margin-bottom:16px}
+.footer-social{display:flex;gap:12px}
+.footer-social a{width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid rgba(255,255,255,0.06);color:#999;transition:all 0.3s;font-size:16px}
+.footer-social a:hover{color:#C9A14A;border-color:#C9A14A;background:rgba(201,161,74,0.05)}
+.footer-col p{font-size:13px;color:#777;line-height:1.8}
+.footer-col p i{color:#C9A14A;width:18px}
+.footer-bottom{text-align:center;padding-top:32px;margin-top:32px;border-top:1px solid rgba(255,255,255,0.04);color:#555;font-size:13px}
+.footer-bottom .heart{color:#C9A14A}
+
+/* ===== SCROLL REVEAL ===== */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity 0.8s ease,transform 0.8s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:1024px){
+  .section{padding:80px 20px}
+  .section-header h2{font-size:34px}
+  .combo-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:768px){
+  .section{padding:60px 16px}
+  .section-header h2{font-size:28px}
+  .sticky-links{display:none}
+  .nav-hamburger{display:block}
+  #header{padding:10px 16px}
+  .header-logo{font-size:18px}
+  .header-phone span{display:none}
+  .combo-grid{grid-template-columns:1fr}
+  .gallery-grid{grid-template-columns:repeat(2,1fr)}
+  .reserve-form .form-row{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:480px){
+  .section{padding:48px 12px}
+  .section-header h2{font-size:24px}
+  .hero-info-cards{grid-template-columns:1fr}
+  .hero-cta{flex-direction:column;align-items:center}
+  .btn{width:100%;justify-content:center}
+  .gallery-grid{grid-template-columns:1fr 1fr;gap:8px}
+  .contatti-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr}
+  .footer-social{justify-content:center}
+  .combo-card .combo-img{height:130px}
+}
+
+/* ===== ADMIN TABLE ===== */
+.admin-table{width:100%;border-collapse:collapse;margin-top:16px;font-size:13px}
+.admin-table th{text-align:left;padding:10px 8px;background:rgba(201,161,74,0.1);color:#C9A14A;font-family:Cinzel,serif;font-size:11px;letter-spacing:1px}
+.admin-table td{padding:8px;border-bottom:1px solid rgba(255,255,255,0.04);color:#bbb}
+.admin-table tr:hover td{background:rgba(255,255,255,0.02)}
+</style>
 </head>
 <body>
 
-<!-- Splash Screen -->
-<div id="splash" aria-hidden="true">
-  <div class="splash-circle">
-    <div class="splash-logo">La Bontà</div>
-    <div class="splash-subtitle">Ristorante</div>
-    <div class="splash-location">
-      <i class="fas fa-map-marker-alt"></i>
-      Valle Martella, Roma
-    </div>
+<!-- SPLASH SCREEN -->
+<div id="splash">
+  <div class="splash-content">
+    <div class="splash-logo">LA BONTÀ</div>
+    <div class="splash-sub" data-i18n="splash_sub">Autentica Cucina Italiana a Valle Martella</div>
+    <div class="splash-utensils"><i class="fas fa-utensils"></i></div>
   </div>
 </div>
 
-<!-- Header -->
-<header>
-  <div class="header-container">
-    <div class="logo-container">
-      <h1 class="logo">La Bontà</h1>
-      <div class="logo-subtitle">Ristorante Italiano</div>
-    </div>
-    
-    <div class="header-controls">
-      <div class="lang-switch">
-        <button data-lang="it" class="active" aria-pressed="true">
-          <span class="lang-flag">🇮🇹</span>
-          <span class="lang-code">IT</span>
-        </button>
-        <button data-lang="en" aria-pressed="false">
-          <span class="lang-flag">🇬🇧</span>
-          <span class="lang-code">EN</span>
-        </button>
-        <button data-lang="fr" aria-pressed="false">
-          <span class="lang-flag">🇫🇷</span>
-          <span class="lang-code">FR</span>
-        </button>
-        <button data-lang="de" aria-pressed="false">
-          <span class="lang-flag">🇩🇪</span>
-          <span class="lang-code">DE</span>
-        </button>
-      </div>
-      
-      <div class="header-contact">
-        <a href="tel:+393474329466" class="contact-link">
-          <i class="fas fa-phone"></i>
-          <span>347 432 9466</span>
-        </a>
-      </div>
-    </div>
+<!-- THREE.JS CANVAS CONTAINER -->
+<div id="three-canvas"></div>
+
+<!-- HEADER -->
+<header id="header">
+  <div class="header-left">
+    <div class="header-logo"><i class="fas fa-utensils"></i> La Bontà</div>
+  </div>
+  <div class="header-right">
+    <button class="lang-btn active" data-lang="it" title="Italiano">IT</button>
+    <button class="lang-btn" data-lang="en" title="English">EN</button>
+    <button class="lang-btn" data-lang="fr" title="Français">FR</button>
+    <button class="lang-btn" data-lang="de" title="Deutsch">DE</button>
+    <a href="tel:+393474329466" class="header-phone"><i class="fas fa-phone"></i> <span>+39 347 432 9466</span></a>
   </div>
 </header>
 
-<!-- TIER 1: Sticky Navigation -->
-<nav id="sticky-nav" class="sticky-nav" aria-label="Navigazione principale">
-  <div class="sticky-nav-inner">
-    <a href="#hero" class="sticky-logo">La Bontà</a>
-    <ul class="nav-links" id="nav-links">
-      <li><a href="#menu" data-section="menu">Menu</a></li>
-      <li><a href="#combos" data-section="combos">Il Nostro Menu</a></li>
-      <li><a href="#gallery" data-section="gallery">Galleria</a></li>
-      <li><a href="#location" data-section="location">Dove Siamo</a></li>
-      <li><a href="#contatti" data-section="contatti">Contatti</a></li>
-    </ul>
-    <button class="hamburger" id="hamburger" aria-label="Apri menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
+<!-- STICKY NAV -->
+<nav id="sticky-nav">
+  <div class="sticky-logo">La Bontà</div>
+  <div class="sticky-links">
+    <a href="#hero" data-nav="hero" data-i18n="nav_home">Home</a>
+    <a href="#menu-circle-section" data-nav="menu" data-i18n="nav_menu">Menu</a>
+    <a href="#gallery" data-nav="gallery" data-i18n="nav_gallery">Galleria</a>
+    <a href="#location" data-nav="location" data-i18n="nav_location">Dove Siamo</a>
+    <a href="#contatti" data-nav="contatti" data-i18n="nav_contacts">Contatti</a>
   </div>
-  <div class="nav-drawer-overlay" id="navDrawerOverlay"></div>
-  <ul class="nav-drawer" id="navDrawer" aria-hidden="true">
-    <li><a href="#menu">Menu</a></li>
-    <li><a href="#combos">Il Nostro Menu</a></li>
-    <li><a href="#gallery">Galleria</a></li>
-    <li><a href="#location">Dove Siamo</a></li>
-    <li><a href="#contatti">Contatti</a></li>
-  </ul>
+  <button class="nav-hamburger" id="hamburger-btn" aria-label="Menu"><i class="fas fa-bars"></i></button>
 </nav>
 
-<!-- Hero -->
-<section id="hero" aria-labelledby="hero-title">
-  <div class="hero-overlay"></div>
+<!-- MOBILE DRAWER -->
+<div id="drawer-overlay"></div>
+<div id="mobile-drawer">
+  <button class="drawer-close" id="drawer-close"><i class="fas fa-times"></i></button>
+  <div class="drawer-links">
+    <a href="#hero" data-i18n="nav_home">Home</a>
+    <a href="#menu-circle-section" data-i18n="nav_menu">Menu</a>
+    <a href="#gallery" data-i18n="nav_gallery">Galleria</a>
+    <a href="#location" data-i18n="nav_location">Dove Siamo</a>
+    <a href="#contatti" data-i18n="nav_contacts">Contatti</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <i class="fas fa-utensils hero-deco hero-deco-1"></i>
+  <i class="fas fa-wine-glass hero-deco hero-deco-2"></i>
+  <i class="fas fa-pizza-slice hero-deco hero-deco-3"></i>
   <div class="hero-content">
-    <div class="hero-logo">
-      <h1 id="hero-title">La Bontà</h1>
-      <div class="hero-subtitle">Ristorante Italiano</div>
-    </div>
-    
-    <div class="hero-info">
-      <div class="info-item">
-        <i class="fas fa-map-marker-alt"></i>
-        <div>
-          <div class="info-label">Location</div>
-          <div class="info-value">Via Riccardo Lombardi, 1<br>Valle Martella (RM)</div>
-        </div>
+    <div class="hero-badge" data-i18n="hero_badge">🇮🇹 Ristorante Italiano</div>
+    <h1 class="hero-title"><span class="gradient-text">La Bontà</span> <span data-i18n="hero_title_sub">Ristorante</span></h1>
+    <p class="hero-subtitle" data-i18n="hero_subtitle">Un viaggio nei sapori autentici della tradizione italiana, nel cuore di Valle Martella</p>
+    <div class="hero-info-cards">
+      <div class="hero-info-card">
+        <i class="fas fa-location-dot"></i>
+        <h4 data-i18n="hero_location_title">DOVE SIAMO</h4>
+        <p data-i18n="hero_location_val">Via Riccardo Lombardi, 1<br>00030 Valle Martella (RM)</p>
       </div>
-      <div class="info-item">
+      <div class="hero-info-card">
         <i class="fas fa-clock"></i>
-        <div>
-          <div class="info-label">Orari</div>
-          <div class="info-value">12:30 - 15:30 • 18:30 - 23:00</div>
-        </div>
+        <h4 data-i18n="hero_hours_title">ORARI</h4>
+        <p data-i18n="hero_hours_val">Lunch 12:30-15:30 · Dinner 18:30-23:00<br><span data-i18n="hero_hours_fri">Ven-Sab fino 00:00</span></p>
       </div>
-      <div class="info-item">
+      <div class="hero-info-card">
         <i class="fas fa-star"></i>
-        <div>
-          <div class="info-label">Valutazione</div>
-          <div class="info-value">
-            <span class="stars">★★★★☆</span>
-            <span class="rating">4.3/5</span>
-          </div>
-        </div>
+        <h4 data-i18n="hero_rating_title">RECENSIONI</h4>
+        <p data-i18n="hero_rating_val">4.3/5</p>
+        <div class="stars">★★★★☆</div>
       </div>
     </div>
-    
     <div class="hero-cta">
-      <button id="explore-btn" class="cta-button pulse">
+      <a href="#menu-circle-section" class="btn btn-primary" data-i18n="hero_cta_menu">Esplora il Menu</a>
+      <a href="https://maps.app.goo.gl/krswxMJfJtvFPN9j8" target="_blank" rel="noopener" class="btn btn-outline" data-i18n="hero_cta_map">Come Arrivare</a>
+    </div>
+  </div>
+  <div class="scroll-indicator"><i class="fas fa-chevron-down"></i></div>
+</section>
+
+<!-- CIRCLE INTERACTIVE MENU -->
+<section id="menu-circle-section" class="section">
+  <div class="section-header reveal">
+    <h2 class="gradient-text" data-i18n="menu_title">Il Nostro Menu</h2>
+    <div class="section-divider"></div>
+    <p data-i18n="menu_subtitle">Esplora le nostre specialità — clicca una categoria per scoprire i piatti</p>
+  </div>
+
+  <div class="menu-circle-wrapper reveal">
+    <div class="menu-circle" id="menuCircle">
+      <div class="menu-circle-item" style="--i:0;transform:rotate(0deg) translateY(-180px) rotate(0deg)" data-category="antipasti">
+        <i class="fas fa-plate-wheat"></i>
+        <span data-i18n="cat_antipasti">Antipasti</span>
+      </div>
+      <div class="menu-circle-item" style="--i:1;transform:rotate(72deg) translateY(-180px) rotate(-72deg)" data-category="primi">
         <i class="fas fa-utensils"></i>
-        <span>Esplora il Menu</span>
-      </button>
-      <a href="https://maps.app.goo.gl/krswxMJfJtvFPN9j8" target="_blank" class="cta-button secondary">
-        <i class="fas fa-directions"></i>
-        <span>Come Raggiungerci</span>
-      </a>
+        <span data-i18n="cat_primi">Primi</span>
+      </div>
+      <div class="menu-circle-item" style="--i:2;transform:rotate(144deg) translateY(-180px) rotate(-144deg)" data-category="secondi">
+        <i class="fas fa-drumstick-bite"></i>
+        <span data-i18n="cat_secondi">Secondi</span>
+      </div>
+      <div class="menu-circle-item" style="--i:3;transform:rotate(216deg) translateY(-180px) rotate(-216deg)" data-category="pizza">
+        <i class="fas fa-pizza-slice"></i>
+        <span data-i18n="cat_pizza">Pizza</span>
+      </div>
+      <div class="menu-circle-item" style="--i:4;transform:rotate(288deg) translateY(-180px) rotate(-288deg)" data-category="dolci">
+        <i class="fas fa-cake"></i>
+        <span data-i18n="cat_dolci">Dolci</span>
+      </div>
+      <div class="menu-circle-center">
+        <span>LA BONTÀ</span>
+        <button class="toggle-btn" id="circleToggle" aria-label="Pause/Play rotation"><i class="fas fa-pause"></i></button>
+      </div>
     </div>
   </div>
-  
-  <div class="hero-scroll">
-    <div class="scroll-indicator">
-      <i class="fas fa-chevron-down"></i>
-    </div>
+
+  <!-- Side Panel -->
+  <div id="circle-side-panel" class="reveal">
+    <span class="side-panel-badge" id="panelBadge"></span>
+    <h3 class="side-panel-title" id="panelTitle"></h3>
+    <p class="side-panel-desc" id="panelDesc"></p>
+    <p class="side-panel-price" id="panelPrice"></p>
+    <button class="side-panel-btn" id="panelViewBtn" data-i18n="panel_view_btn">Vedi Tutti i Piatti <i class="fas fa-arrow-right"></i></button>
   </div>
 </section>
 
-<!-- Interactive Circle - Food Categories -->
-<section id="menu" class="circle-section">
-  <div class="section-header">
-    <h2>Il Nostro <span class="gold-text">Menu</span></h2>
-    <p class="section-subtitle">Clicca sulle icone per scoprire le nostre categorie culinarie</p>
+<!-- FULL MENU MODAL -->
+<div class="modal-overlay" id="menuModal">
+  <div class="modal" role="dialog" aria-label="Menu category">
+    <button class="modal-close" id="menuModalClose">&times;</button>
+    <h3 class="gradient-text" id="menuModalTitle"></h3>
+    <div class="dish-grid" id="menuModalGrid"></div>
   </div>
-  
-  <div class="circle-interactive">
-    <div class="circle-container">
-      <!-- Main Circle -->
-      <div class="main-circle" id="mainCircle">
-        <div class="circle-glow"></div>
-        <div class="circle-border"></div>
-        
-        <!-- Center Logo -->
-        <div class="circle-center">
-          <div class="center-logo">La Bontà</div>
-          <div class="center-subtitle">Valle Martella</div>
-          <button class="center-play" id="toggleRotation">
-            <i class="fas fa-pause" id="rotationIcon"></i>
-          </button>
-        </div>
-        
-        <!-- Interactive Items - 5 Food Categories -->
-        <div class="circle-item" data-category="antipasti" style="--i:0">
-          <div class="item-content">
-            <i class="fas fa-cheese"></i>
-            <span>Antipasti</span>
-          </div>
-          <div class="item-tooltip">Starters</div>
-        </div>
-        
-        <div class="circle-item" data-category="primi" style="--i:1">
-          <div class="item-content">
-            <i class="fas fa-bowl-food"></i>
-            <span>Primi</span>
-          </div>
-          <div class="item-tooltip">Pasta</div>
-        </div>
-        
-        <div class="circle-item" data-category="secondi" style="--i:2">
-          <div class="item-content">
-            <i class="fas fa-fish"></i>
-            <span>Secondi</span>
-          </div>
-          <div class="item-tooltip">Main Courses</div>
-        </div>
-        
-        <div class="circle-item" data-category="pizza" style="--i:3">
-          <div class="item-content">
-            <i class="fas fa-pizza-slice"></i>
-            <span>Pizza</span>
-          </div>
-          <div class="item-tooltip">Wood-Fired</div>
-        </div>
-        
-        <div class="circle-item" data-category="dolci" style="--i:4">
-          <div class="item-content">
-            <i class="fas fa-cake-candles"></i>
-            <span>Dolci</span>
-          </div>
-          <div class="item-tooltip">Desserts</div>
-        </div>
-        
-        <!-- Navigation -->
-        <button class="circle-nav prev">
-          <i class="fas fa-chevron-left"></i>
-        </button>
-        <button class="circle-nav next">
-          <i class="fas fa-chevron-right"></i>
-        </button>
-      </div>
-      
-      <!-- Selection Display -->
-      <div class="selection-display">
-        <div class="selection-header">
-          <h3 id="selectedTitle">Seleziona una Categoria</h3>
-          <div class="selection-badge" id="selectedBadge"></div>
-        </div>
-        <p class="selection-desc" id="selectedDesc">
-          Clicca su una delle icone per scoprire i piatti di ogni categoria
-        </p>
-        <div class="selection-price">
-          <span class="price-label">Prezzo:</span>
-          <span class="price-value" id="selectedPrice">--</span>
-        </div>
-        <button class="selection-button" id="viewDetailsBtn" disabled>
-          <i class="fas fa-eye"></i>
-          <span>Vedi Menu</span>
-        </button>
-      </div>
-    </div>
+</div>
+
+<!-- COMBO MENUS -->
+<section id="combo-section">
+  <div class="section-header reveal">
+    <h2 class="gradient-text" data-i18n="combo_title">Menu Speciali</h2>
+    <div class="section-divider"></div>
+    <p data-i18n="combo_subtitle">Selezioni pensate per ogni occasione — dall'intimità alla festa con gli amici</p>
   </div>
+  <div class="combo-grid" id="comboGrid"></div>
 </section>
 
-<!-- Combos Grid -->
-<section id="combos" class="combos-grid">
-  <div class="section-header">
-    <h2>I Nostri <span class="gold-text">Menu Speciali</span></h2>
-    <p class="section-subtitle">Esperienze complete curate dai nostri chef</p>
+<!-- COMBO MODAL -->
+<div class="modal-overlay" id="comboModal">
+  <div class="modal combo-modal-detail" role="dialog" aria-label="Combo details">
+    <button class="modal-close" id="comboModalClose">&times;</button>
+    <h3 class="gradient-text" id="comboModalTitle"></h3>
+    <div id="comboModalBody"></div>
   </div>
-  
-  <div class="grid-container">
-    <!-- Couples Combo -->
-    <div class="combo-card featured" data-combo="couples">
-      <div class="card-ribbon">Romantico</div>
-      <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1559925393-8be0ec4767c8?auto=format&fit=crop&q=80&w=800')"></div>
-      <div class="card-content">
-        <div class="card-header">
-          <div class="card-icon">
-            <i class="fas fa-heart"></i>
-          </div>
-          <h3 class="card-title">Menu Coppia</h3>
-          <p class="card-subtitle">Romantico per 2</p>
-        </div>
-        <div class="card-body">
-          <ul class="card-features">
-            <li><i class="fas fa-check-circle"></i> Antipasto di Mare</li>
-            <li><i class="fas fa-check-circle"></i> Pasta allo Scoglio</li>
-            <li><i class="fas fa-check-circle"></i> Vino + Dolce + Caffè</li>
-          </ul>
-          <div class="card-price">
-            <div class="price-main">€90</div>
-            <div class="price-note">per 2 persone</div>
-          </div>
-        </div>
-        <button class="card-button" data-combo="couples">
-          <span>Scegli Questo</span>
-          <i class="fas fa-arrow-right"></i>
-        </button>
-      </div>
-    </div>
-    
-    <!-- Family Combo -->
-    <div class="combo-card" data-combo="family">
-      <div class="card-ribbon">Famiglia</div>
-      <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&q=80&w=800')"></div>
-      <div class="card-content">
-        <div class="card-header">
-          <div class="card-icon">
-            <i class="fas fa-home"></i>
-          </div>
-          <h3 class="card-title">Menu Famiglia</h3>
-          <p class="card-subtitle">Abbondante e Conviviale</p>
-        </div>
-        <div class="card-body">
-          <ul class="card-features">
-            <li><i class="fas fa-check-circle"></i> Tagliere Misto Grande</li>
-            <li><i class="fas fa-check-circle"></i> Grigliata Mista</li>
-            <li><i class="fas fa-check-circle"></i> Vino + Contorni + Dolci</li>
-          </ul>
-          <div class="card-price">
-            <div class="price-main">€156</div>
-            <div class="price-note">da 4 persone</div>
-          </div>
-        </div>
-        <button class="card-button" data-combo="family">
-          <span>Scegli Questo</span>
-          <i class="fas fa-arrow-right"></i>
-        </button>
-      </div>
-    </div>
-    
-    <!-- Friends Combo -->
-    <div class="combo-card" data-combo="friends">
-      <div class="card-ribbon">Gruppo</div>
-      <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&q=80&w=800')"></div>
-      <div class="card-content">
-        <div class="card-header">
-          <div class="card-icon">
-            <i class="fas fa-users"></i>
-          </div>
-          <h3 class="card-title">Menu Amici</h3>
-          <p class="card-subtitle">Condivisione e Allegria</p>
-        </div>
-        <div class="card-body">
-          <ul class="card-features">
-            <li><i class="fas fa-check-circle"></i> Pizza Assortita</li>
-            <li><i class="fas fa-check-circle"></i> Bruschette e Fritti</li>
-            <li><i class="fas fa-check-circle"></i> Birra + Dolce</li>
-          </ul>
-          <div class="card-price">
-            <div class="price-main">€69</div>
-            <div class="price-note">base + persona</div>
-          </div>
-        </div>
-        <button class="card-button" data-combo="friends">
-          <span>Scegli Questo</span>
-          <i class="fas fa-arrow-right"></i>
-        </button>
-      </div>
-    </div>
+</div>
 
-    <!-- Chef Selection -->
-    <div class="combo-card" data-combo="chef">
-      <div class="card-ribbon">Consigliato</div>
-      <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&q=80&w=800')"></div>
-      <div class="card-content">
-        <div class="card-header">
-          <div class="card-icon">
-            <i class="fas fa-crown"></i>
-          </div>
-          <h3 class="card-title">Selezione dello Chef</h3>
-          <p class="card-subtitle">Il Meglio del Menu</p>
-        </div>
-        <div class="card-body">
-          <ul class="card-features">
-            <li><i class="fas fa-check-circle"></i> Antipasto + Primo + Secondo</li>
-            <li><i class="fas fa-check-circle"></i> Calice di Vino</li>
-            <li><i class="fas fa-check-circle"></i> Dolce + Caffè</li>
-          </ul>
-          <div class="card-price">
-            <div class="price-main">€62</div>
-            <div class="price-note">a persona</div>
-          </div>
-        </div>
-        <button class="card-button" data-combo="chef">
-          <span>Scegli Questo</span>
-          <i class="fas fa-arrow-right"></i>
-        </button>
-      </div>
-    </div>
+<!-- GALLERY -->
+<section id="gallery" class="section">
+  <div class="section-header reveal">
+    <h2 class="gradient-text" data-i18n="gallery_title">Galleria</h2>
+    <div class="section-divider"></div>
+    <p data-i18n="gallery_subtitle">Scorri tra le immagini del nostro ristorante, dei nostri piatti e dell'atmosfera unica</p>
   </div>
+  <div class="gallery-grid" id="galleryGrid"></div>
 </section>
 
-<!-- Location Section -->
-<section id="location" class="location-section">
-  <div class="location-container">
+<!-- LIGHTBOX -->
+<div id="lightbox">
+  <button class="lb-close" id="lbClose">&times;</button>
+  <button class="lb-prev" id="lbPrev"><i class="fas fa-chevron-left"></i></button>
+  <img id="lbImg" src="" alt="Gallery image">
+  <button class="lb-next" id="lbNext"><i class="fas fa-chevron-right"></i></button>
+  <div class="lb-counter" id="lbCounter"></div>
+</div>
+
+<!-- LOCATION -->
+<section id="location" class="section">
+  <div class="section-header reveal">
+    <h2 class="gradient-text" data-i18n="location_title">Dove Siamo</h2>
+    <div class="section-divider"></div>
+    <p data-i18n="location_subtitle">Vieni a trovarci — siamo aperti tutti i giorni</p>
+  </div>
+  <div class="location-wrapper reveal">
     <div class="location-info">
-      <h2>Vieni a <span class="gold-text">Trovarci</span></h2>
-      <div class="location-details">
-        <div class="detail-item">
-          <i class="fas fa-map-marker-alt"></i>
-          <div>
-            <h4>Indirizzo</h4>
-            <p>Via Riccardo Lombardi, 1<br>00030 Valle Martella (RM)</p>
-          </div>
-        </div>
-        <div class="detail-item">
-          <i class="fas fa-clock"></i>
-          <div>
-            <h4>Orari di Apertura</h4>
-            <p>Pranzo: 12:30 - 15:30<br>Cena: 18:30 - 23:00<br><em>Venerdì e Sabato fino alle 00:00</em></p>
-          </div>
-        </div>
-        <div class="detail-item">
-          <i class="fas fa-phone"></i>
-          <div>
-            <h4>Prenotazioni</h4>
-            <p>+39 347 432 9466<br>+39 06 6927 7987<br>+39 06 6928 0943</p>
-          </div>
+      <div class="location-card-detail">
+        <h4><i class="fas fa-location-dot"></i> <span data-i18n="loc_address_title">Indirizzo</span></h4>
+        <p data-i18n="loc_address_val">Via Riccardo Lombardi, 1<br>00030 Valle Martella (RM)</p>
+        <a href="https://maps.app.goo.gl/krswxMJfJtvFPN9j8" target="_blank" rel="noopener" class="location-map-link" data-i18n="loc_view_map">Apri in Google Maps <i class="fas fa-external-link-alt"></i></a>
+      </div>
+      <div class="location-card-detail">
+        <h4><i class="fas fa-clock"></i> <span data-i18n="loc_hours_title">Orari di Apertura</span></h4>
+        <div class="hours-grid">
+          <span data-i18n="loc_hours_lunch_label">Pranzo:</span>
+          <span class="hours-val" data-i18n="loc_hours_lunch_val">12:30 – 15:30</span>
+          <span data-i18n="loc_hours_dinner_label">Cena:</span>
+          <span class="hours-val" data-i18n="loc_hours_dinner_val">18:30 – 23:00</span>
+          <span data-i18n="loc_hours_fri_label">Ven-Sab:</span>
+          <span class="hours-val" data-i18n="loc_hours_fri_val">18:30 – 00:00</span>
+          <span data-i18n="loc_hours_open_label">Apertura:</span>
+          <span class="hours-val" data-i18n="loc_hours_open_val">Tutti i giorni</span>
         </div>
       </div>
-      <a href="https://maps.app.goo.gl/krswxMJfJtvFPN9j8" target="_blank" class="location-button">
-        <i class="fas fa-directions"></i>
-        <span>Ottieni Indicazioni</span>
-      </a>
+      <div class="location-card-detail">
+        <h4><i class="fas fa-phone"></i> <span data-i18n="loc_phone_title">Telefono</span></h4>
+        <p><a href="tel:+393474329466" style="color:#C9A14A;">+39 347 432 9466</a></p>
+      </div>
     </div>
-    <div class="location-map">
-      <iframe
-        src="https://www.openstreetmap.org/export/embed.html?bbox=12.62,41.89,12.73,41.96&layer=mapnik&marker=41.9200,12.6700"
-        width="100%" height="400" style="border:0;border-radius:var(--radius-lg);"
-        allowfullscreen="" loading="lazy"
-        title="La Bontà Ristorante - Valle Martella"></iframe>
-      <a href="https://maps.app.goo.gl/krswxMJfJtvFPN9j8" target="_blank" class="map-link" style="display:inline-block;margin-top:1rem;">
-        <i class="fas fa-external-link-alt"></i> Vedi Mappa Completa
-      </a>
+    <div>
+      <div class="location-map-frame">
+        <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=12.712%2C41.88%2C12.732%2C41.9&amp;layer=mapnik&amp;marker=41.89%2C12.722" title="Mappa La Bontà Ristorante" loading="lazy"></iframe>
+      </div>
+      <a href="https://www.openstreetmap.org/?mlat=41.89&amp;mlon=12.722#map=16/41.89/12.722" target="_blank" rel="noopener" class="location-map-link" data-i18n="loc_view_full_map">Vedi mappa completa <i class="fas fa-external-link-alt"></i></a>
     </div>
   </div>
 </section>
 
-<!-- Modal -->
-<div class="modal" id="comboModal">
-  <div class="modal-overlay"></div>
-  <div class="modal-container">
-    <div class="modal-content">
-      <button class="modal-close" id="modalClose">
-        <i class="fas fa-times"></i>
-      </button>
-      
-      <div class="modal-header">
-        <div class="modal-badge" id="modalBadge"></div>
-        <h2 id="modalTitle"></h2>
-        <p class="modal-subtitle" id="modalSubtitle"></p>
-      </div>
-      
-      <div class="modal-body">
-        <div class="modal-image" id="modalImage"></div>
-        
-        <div class="modal-details">
-          <div class="details-section">
-            <h3><i class="fas fa-info-circle"></i> Descrizione</h3>
-            <p id="modalDesc"></p>
-          </div>
-          
-          <div class="details-section" id="peopleSection" style="display: none;">
-            <h3><i class="fas fa-user-friends"></i> Numero di Persone</h3>
-            <div class="people-selector">
-              <button class="people-btn" id="decreasePeople">-</button>
-              <select id="peopleSelect" class="people-select">
-                <option value="3">3 persone</option>
-                <option value="4" selected>4 persone</option>
-                <option value="5">5 persone</option>
-                <option value="6">6 persone</option>
-                <option value="8">8 persone</option>
-              </select>
-              <button class="people-btn" id="increasePeople">+</button>
-            </div>
-          </div>
-          
-          <div class="details-section">
-            <h3><i class="fas fa-utensils"></i> Il Menu Include</h3>
-            <div class="menu-items" id="menuItems"></div>
-          </div>
-          
-          <!-- Customize Note -->
-          <div class="customize-note" id="customizeNote" style="display: none;">
-            <i class="fas fa-info-circle"></i>
-            <span>Se desideri modificare qualcosa nell'offerta come bevande o piatti, chiedi pure al cameriere.</span>
-          </div>
-          
-          <div class="total-section">
-            <div class="total-label">
-              <span>Totale</span>
-              <span id="totalPeople"></span>
-            </div>
-            <div class="total-value" id="modalTotal"></div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="modal-footer">
-        <button class="footer-btn secondary" id="closeModalBtn">
-          <i class="fas fa-times"></i>
-          Chiudi
-        </button>
-        <button class="footer-btn primary" id="reserveBtn">
-          <i class="fab fa-whatsapp"></i>
-          <span>Ordina Ora</span>
-        </button>
-      </div>
-    </div>
-  </div>
+<!-- RESERVATION BUTTON (opens modal) -->
+<div style="text-align:center;padding:0 24px 60px;position:relative;z-index:1">
+  <button class="btn btn-primary" id="openReserveBtn" style="font-size:16px;padding:16px 40px" data-i18n="reserve_cta">Prenota un Tavolo</button>
 </div>
 
-<!-- TIER 1: Photo Gallery -->
-<section id="gallery" class="gallery-section">
-  <div class="section-header">
-    <h2>La Nostra <span class="gold-text">Galleria</span></h2>
-    <p class="section-subtitle">Un viaggio visivo attraverso i sapori e l'atmosfera di La Bontà</p>
-  </div>
-  <div class="gallery-grid" id="galleryGrid">
-    <div class="gallery-item" data-index="0" style="background-image:url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&q=80&w=900')">
-      <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
-    </div>
-    <div class="gallery-item" data-index="1" style="background-image:url('https://images.unsplash.com/photo-1563379926898-05f4575a45d8?auto=format&fit=crop&q=80&w=900')">
-      <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
-    </div>
-    <div class="gallery-item" data-index="2" style="background-image:url('https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&q=80&w=900')">
-      <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
-    </div>
-    <div class="gallery-item" data-index="3" style="background-image:url('https://images.unsplash.com/photo-1559925393-8be0ec4767c8?auto=format&fit=crop&q=80&w=900')">
-      <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
-    </div>
-    <div class="gallery-item" data-index="4" style="background-image:url('https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&q=80&w=900')">
-      <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
-    </div>
-    <div class="gallery-item" data-index="5" style="background-image:url('https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?auto=format&fit=crop&q=80&w=900')">
-      <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
-    </div>
-    <div class="gallery-item" data-index="6" style="background-image:url('https://images.unsplash.com/photo-1626200419199-391ae4be7a41?auto=format&fit=crop&q=80&w=900')">
-      <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
-    </div>
-    <div class="gallery-item" data-index="7" style="background-image:url('https://images.unsplash.com/photo-1517248135467-2c7ed3ab7229?auto=format&fit=crop&q=80&w=900')">
-      <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
-    </div>
-    <div class="gallery-item" data-index="8" style="background-image:url('https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?auto=format&fit=crop&q=80&w=900')">
-      <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
-    </div>
-  </div>
-</section>
-
-<!-- TIER 1: Lightbox -->
-<div id="lightbox" class="lightbox" role="dialog" aria-label="Galleria foto" aria-hidden="true">
-  <div class="lightbox-overlay" id="lightboxOverlay"></div>
-  <div class="lightbox-content">
-    <button class="lightbox-close" id="lightboxClose" aria-label="Chiudi"><i class="fas fa-times"></i></button>
-    <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Precedente"><i class="fas fa-chevron-left"></i></button>
-    <div class="lightbox-img" id="lightboxImg"></div>
-    <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Successiva"><i class="fas fa-chevron-right"></i></button>
-    <div class="lightbox-counter" id="lightboxCounter">1 / 9</div>
-  </div>
-</div>
-
-<!-- TIER 1: Reservation Modal -->
-<div id="reservationModal" class="t1-modal" role="dialog" aria-labelledby="resModalTitle" aria-hidden="true">
-  <div class="t1-modal-overlay" id="resModalOverlay"></div>
-  <div class="t1-modal-container">
-    <div class="t1-modal-content">
-      <button class="t1-modal-close" id="resModalClose" aria-label="Chiudi"><i class="fas fa-times"></i></button>
-      <div class="t1-modal-header">
-        <div class="t1-modal-icon"><i class="fas fa-calendar-check"></i></div>
-        <h2 id="resModalTitle">Prenota un Tavolo</h2>
-        <p>La Bontà Ristorante — Valle Martella</p>
-      </div>
-      <form id="reservationForm" class="reservation-form" novalidate>
-        <div class="res-row">
-          <div class="res-field">
-            <label for="resDate"><i class="fas fa-calendar"></i> Data *</label>
-            <input type="date" id="resDate" name="date" required autocomplete="off" />
-            <span class="field-error" id="resDateErr"></span>
+<!-- RESERVATION MODAL -->
+<div class="modal-overlay" id="reserveModal">
+  <div class="modal" role="dialog" aria-label="Reservation">
+    <button class="modal-close" id="reserveModalClose">&times;</button>
+    <h3 class="gradient-text" data-i18n="reserve_title">Prenota un Tavolo</h3>
+    <div id="reserveFormContainer">
+      <form class="reserve-form" id="reserveForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label data-i18n="reserve_date">Data</label>
+            <input type="date" id="reserveDate" required min="">
           </div>
-          <div class="res-field">
-            <label for="resTime"><i class="fas fa-clock"></i> Orario *</label>
-            <select id="resTime" name="time" required>
-              <option value="">— Scegli —</option>
-              <optgroup label="Pranzo">
-                <option value="12:30">12:30</option>
-                <option value="13:00">13:00</option>
-                <option value="13:30">13:30</option>
-                <option value="14:00">14:00</option>
-                <option value="14:30">14:30</option>
-                <option value="15:00">15:00</option>
-              </optgroup>
-              <optgroup label="Cena">
-                <option value="18:30">18:30</option>
-                <option value="19:00">19:00</option>
-                <option value="19:30">19:30</option>
-                <option value="20:00">20:00</option>
-                <option value="20:30">20:30</option>
-                <option value="21:00">21:00</option>
-                <option value="21:30">21:30</option>
-                <option value="22:00">22:00</option>
-              </optgroup>
+          <div class="form-group">
+            <label data-i18n="reserve_time">Ora</label>
+            <select id="reserveTime" required>
+              <option value="" data-i18n="reserve_time_placeholder" disabled selected>Seleziona ora</option>
             </select>
-            <span class="field-error" id="resTimeErr"></span>
           </div>
         </div>
-        <div class="res-field">
-          <label><i class="fas fa-users"></i> Numero di Ospiti *</label>
-          <div class="guests-selector">
-            <button type="button" class="guests-btn" id="guestsDecrease" aria-label="Meno ospiti">−</button>
-            <div class="guests-display" id="guestsDisplay">2</div>
-            <button type="button" class="guests-btn" id="guestsIncrease" aria-label="Più ospiti">+</button>
-            <input type="hidden" id="resGuests" name="guests" value="2" />
+        <div class="form-row">
+          <div class="form-group">
+            <label data-i18n="reserve_guests">Numero Ospiti</label>
+            <div class="people-toggle">
+              <button type="button" id="guestMinus"><i class="fas fa-minus"></i></button>
+              <span id="guestCount">2</span>
+              <button type="button" id="guestPlus"><i class="fas fa-plus"></i></button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label data-i18n="reserve_name">Nome</label>
+            <input type="text" id="reserveName" placeholder="Mario Rossi" required>
           </div>
         </div>
-        <div class="res-row">
-          <div class="res-field">
-            <label for="resName"><i class="fas fa-user"></i> Nome *</label>
-            <input type="text" id="resName" name="name" placeholder="Il tuo nome" required autocomplete="name" />
-            <span class="field-error" id="resNameErr"></span>
+        <div class="form-row">
+          <div class="form-group">
+            <label data-i18n="reserve_phone">Telefono</label>
+            <input type="tel" id="reservePhone" placeholder="+39 3XX XXX XXXX" required>
           </div>
-          <div class="res-field">
-            <label for="resPhone"><i class="fas fa-phone"></i> Telefono *</label>
-            <input type="tel" id="resPhone" name="phone" placeholder="+39 3XX XXX XXXX" required autocomplete="tel" />
-            <span class="field-error" id="resPhoneErr"></span>
+          <div class="form-group">
+            <label data-i18n="reserve_email">Email <span style="color:#555;font-size:11px" data-i18n="reserve_optional">(opzionale)</span></label>
+            <input type="email" id="reserveEmail" placeholder="email@esempio.it">
           </div>
         </div>
-        <div class="res-field">
-          <label for="resEmail"><i class="fas fa-envelope"></i> Email <span class="optional">(opzionale)</span></label>
-          <input type="email" id="resEmail" name="email" placeholder="tua@email.com" autocomplete="email" />
+        <div class="form-group">
+          <label data-i18n="reserve_notes">Note</label>
+          <textarea id="reserveNotes" placeholder="Allergie, richieste speciali..." rows="2"></textarea>
         </div>
-        <div class="res-field">
-          <label for="resNotes"><i class="fas fa-comment"></i> Richieste Speciali <span class="optional">(opzionale)</span></label>
-          <textarea id="resNotes" name="notes" rows="3" placeholder="Allergie, occasioni speciali, preferenze…"></textarea>
-        </div>
-        <div class="res-actions">
-          <button type="submit" class="res-submit-btn" id="resSubmitBtn">
-            <i class="fas fa-check-circle"></i>
-            <span>Prenota Ora</span>
-          </button>
-        </div>
+        <button type="submit" class="reserve-btn" data-i18n="reserve_submit">Prenota Ora</button>
       </form>
-      <!-- Success state (hidden initially) -->
-      <div id="resSuccessState" class="res-success-state" style="display:none;">
-        <div class="res-success-icon"><i class="fas fa-check-circle"></i></div>
-        <h3>Prenotazione Inviata!</h3>
-        <p id="resSuccessDetails"></p>
-        <button class="res-whatsapp-btn" id="resWhatsAppConfirm">
-          <i class="fab fa-whatsapp"></i>
-          Conferma su WhatsApp
-        </button>
-        <button class="res-close-success" id="resCloseSuccess">Chiudi</button>
+      <div class="reserve-success" id="reserveSuccess">
+        <i class="fas fa-check-circle"></i>
+        <h4 data-i18n="reserve_success_title">Prenotazione Confermata!</h4>
+        <p data-i18n="reserve_success_text">Grazie, ti abbiamo inviato un riepilogo. Puoi confermare su WhatsApp.</p>
+        <a id="reserveWaConfirm" href="#" target="_blank" rel="noopener" class="wa-confirm"><i class="fab fa-whatsapp"></i> <span data-i18n="reserve_success_wa">Conferma su WhatsApp</span></a>
       </div>
     </div>
   </div>
 </div>
 
-<!-- TIER 1: WhatsApp Mini Modal -->
-<div id="waModal" class="wa-modal" role="dialog" aria-label="WhatsApp" aria-hidden="true">
-  <div class="wa-modal-box">
-    <p class="wa-modal-title"><i class="fab fa-whatsapp"></i> Come possiamo aiutarti?</p>
-    <button class="wa-option-btn" id="waOptionReserve">
-      <i class="fas fa-calendar-check"></i>
-      Prenota un Tavolo
-    </button>
-    <button class="wa-option-btn" id="waOptionTakeaway">
-      <i class="fas fa-shopping-bag"></i>
-      Ordina da Asporto
-    </button>
-    <button class="wa-option-btn" id="waOptionInfo">
-      <i class="fas fa-info-circle"></i>
-      Info &amp; Domande
-    </button>
-    <button class="wa-modal-cancel" id="waModalCancel">Annulla</button>
+<!-- CONTATTI -->
+<section id="contatti" class="section">
+  <div class="section-header reveal">
+    <h2 class="gradient-text" data-i18n="contatti_title">Contatti</h2>
+    <div class="section-divider"></div>
+    <p data-i18n="contatti_subtitle">Siamo sempre a tua disposizione</p>
   </div>
-</div>
-
-<!-- TIER 1: Admin Dashboard -->
-<div id="adminPanel" class="admin-panel" style="display:none;" aria-label="Pannello amministratore">
-  <div class="admin-header">
-    <h2><i class="fas fa-shield-alt"></i> Pannello Prenotazioni</h2>
-    <div class="admin-actions">
-      <button class="admin-btn" id="adminExportCSV"><i class="fas fa-file-csv"></i> Esporta CSV</button>
-      <button class="admin-btn danger" id="adminClearAll"><i class="fas fa-trash"></i> Elimina Tutto</button>
+  <div class="contatti-grid reveal">
+    <div class="contatti-card">
+      <i class="fas fa-phone"></i>
+      <h4 data-i18n="contatti_phone_title">Telefono</h4>
+      <p><a href="tel:+393474329466">+39 347 432 9466</a></p>
+      <p><a href="tel:+390612345678">+39 06 1234 5678</a></p>
+      <p><a href="tel:+390687654321">+39 06 8765 4321</a></p>
     </div>
-  </div>
-  <div class="admin-stats" id="adminStats"></div>
-  <div class="admin-table-wrapper">
-    <table class="admin-table" id="adminTable">
-      <thead>
-        <tr>
-          <th>Data</th><th>Orario</th><th>Ospiti</th><th>Nome</th>
-          <th>Telefono</th><th>Email</th><th>Note</th><th>Stato</th><th>Azioni</th>
-        </tr>
-      </thead>
-      <tbody id="adminTableBody"></tbody>
-    </table>
-    <p id="adminEmpty" class="admin-empty" style="display:none;">Nessuna prenotazione salvata.</p>
-  </div>
-</div>
-
-<!-- TIER 1: Toast Notification -->
-<div id="toast" class="toast" role="alert" aria-live="polite"></div>
-
-<!-- TIER 1: Reservation FAB (bottom-right) -->
-<button class="fab-reserve" id="fabReserve" aria-label="Prenota un tavolo">
-  <i class="fas fa-calendar-check"></i>
-  <span>Prenota</span>
-</button>
-
-<!-- TIER 1: WhatsApp FAB (bottom-left) -->
-<button class="fab-whatsapp" id="fabWhatsApp" aria-label="Contattaci su WhatsApp">
-  <i class="fab fa-whatsapp"></i>
-</button>
-
-<!-- Contatti Section -->
-<section id="contatti" class="contatti-section">
-  <div class="section-header">
-    <h2>I Nostri <span class="gold-text">Contatti</span></h2>
-    <p class="section-subtitle">Siamo qui per voi — chiamateci, scriveteci o venite a trovarci</p>
-  </div>
-  <div class="contatti-container">
-    <div class="contatti-grid">
-      <div class="contatti-card">
-        <i class="fas fa-phone"></i>
-        <h3>Telefono</h3>
-        <a href="tel:+393474329466">+39 347 432 9466</a>
-        <a href="tel:+390669277987">+39 06 6927 7987</a>
-        <a href="tel:+390669280943">+39 06 6928 0943</a>
-      </div>
-      <div class="contatti-card">
-        <i class="fas fa-clock"></i>
-        <h3>Orari</h3>
-        <p><strong>Pranzo:</strong> 12:30 – 15:30</p>
-        <p><strong>Cena:</strong> 18:30 – 23:00</p>
-        <p><em>Venerdì e Sabato fino alle 00:00</em></p>
-        <p><em>Aperto tutti i giorni</em></p>
-      </div>
-      <div class="contatti-card">
-        <i class="fas fa-share-alt"></i>
-        <h3>Seguici</h3>
-        <div class="contatti-social">
-          <a href="https://www.instagram.com/la_bonta_ristorante/" target="_blank" rel="noopener">
-            <i class="fab fa-instagram"></i> Instagram
-          </a>
-          <a href="https://www.facebook.com/labontaristorante/" target="_blank" rel="noopener">
-            <i class="fab fa-facebook-f"></i> Facebook
-          </a>
-          <a href="https://www.tripadvisor.com/Restaurant_Review-g17219827-d25438184-Reviews-La_bonta-Valle_Martella_Province_of_Rome_Lazio.html" target="_blank" rel="noopener">
-            <i class="fab fa-tripadvisor"></i> TripAdvisor
-          </a>
-        </div>
+    <div class="contatti-card">
+      <i class="fas fa-clock"></i>
+      <h4 data-i18n="contatti_hours_title">Orari</h4>
+      <p data-i18n="contatti_hours_lunch">Pranzo: 12:30 – 15:30</p>
+      <p data-i18n="contatti_hours_dinner">Cena: 18:30 – 23:00</p>
+      <p data-i18n="contatti_hours_fri">Ven-Sab: fino alle 00:00</p>
+      <p style="color:#C9A14A;font-family:Cinzel,serif;margin-top:6px" data-i18n="contatti_hours_open">Sempre Aperti</p>
+    </div>
+    <div class="contatti-card">
+      <i class="fas fa-share-nodes"></i>
+      <h4 data-i18n="contatti_social_title">Social</h4>
+      <p>Seguici sui nostri canali</p>
+      <div class="social-links">
+        <a href="https://www.instagram.com/la_bonta_ristorante" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/LaBontaRistorante" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.tripadvisor.com" target="_blank" rel="noopener" aria-label="TripAdvisor"><i class="fab fa-tripadvisor"></i></a>
       </div>
     </div>
-    <div class="contatti-whatsapp">
-      <button class="contatti-wa-btn" id="contattiWaBtn">
-        <i class="fab fa-whatsapp"></i>
-        Contattaci su WhatsApp
-      </button>
-    </div>
+  </div>
+  <div style="text-align:center;margin-top:32px">
+    <a href="https://wa.me/393474329466" target="_blank" rel="noopener" class="wa-cta"><i class="fab fa-whatsapp"></i> <span data-i18n="contatti_wa_cta">Scrivici su WhatsApp</span></a>
   </div>
 </section>
 
-<!-- Footer -->
-<footer class="footer">
-  <div class="footer-content">
-    <div class="footer-section">
-      <h3 class="footer-logo">La Bontà</h3>
-      <p class="footer-tagline">Ristorante Italiano<br>Valle Martella</p>
+<!-- FOOTER -->
+<footer id="footer">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <div class="footer-logo">La Bontà</div>
+      <p class="footer-tagline" data-i18n="footer_tagline">Autentica cucina italiana dal 1998</p>
       <div class="footer-social">
-        <a href="https://www.instagram.com/la_bonta_ristorante/" target="_blank"><i class="fab fa-instagram"></i></a>
-        <a href="https://www.facebook.com/labontaristorante/" target="_blank"><i class="fab fa-facebook-f"></i></a>
-        <a href="https://www.tripadvisor.com/Restaurant_Review-g17219827-d25438184-Reviews-La_bonta-Valle_Martella_Province_of_Rome_Lazio.html" target="_blank"><i class="fab fa-tripadvisor"></i></a>
+        <a href="https://www.instagram.com/la_bonta_ristorante" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/LaBontaRistorante" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.tripadvisor.com" target="_blank" rel="noopener" aria-label="TripAdvisor"><i class="fab fa-tripadvisor"></i></a>
+        <a href="https://wa.me/393474329466" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
       </div>
     </div>
-    
-    <div class="footer-section">
-      <h4>Contatti</h4>
-      <p><i class="fas fa-map-marker-alt"></i> Via Riccardo Lombardi, 1, Valle Martella (RM)</p>
+    <div class="footer-col">
+      <h4 data-i18n="footer_contacts_title">Contatti</h4>
+      <p><i class="fas fa-location-dot"></i> Via Riccardo Lombardi, 1<br>00030 Valle Martella (RM)</p>
       <p><i class="fas fa-phone"></i> +39 347 432 9466</p>
-      <p><i class="fas fa-globe"></i> <a href="https://www.labontaristorante.com" target="_blank">labontaristorante.com</a></p>
+      <p><i class="fas fa-envelope"></i> info@labontaristorante.it</p>
     </div>
-    
-    <div class="footer-section">
-      <h4>Orari</h4>
-      <p><strong>Pranzo:</strong> 12:30 - 15:30</p>
-      <p><strong>Cena:</strong> 18:30 - 23:00</p>
-      <p><em>Aperto tutti i giorni</em></p>
+    <div class="footer-col">
+      <h4 data-i18n="footer_hours_title">Orari</h4>
+      <p data-i18n="footer_hours_lunch">Pranzo: 12:30 – 15:30</p>
+      <p data-i18n="footer_hours_dinner">Cena: 18:30 – 23:00</p>
+      <p data-i18n="footer_hours_fri">Ven-Sab: fino alle 00:00</p>
+      <p style="color:#C9A14A;margin-top:8px" data-i18n="footer_hours_open">Aperto tutti i giorni</p>
     </div>
   </div>
-  
   <div class="footer-bottom">
-    <p>© 2026 La Bontà Ristorante. Tutti i diritti riservati.</p>
-    <p class="footer-credits">
-      Made with <i class="fas fa-heart"></i> in Valle Martella
-    </p>
+    <p>© 2026 La Bontà Ristorante &nbsp;·&nbsp; Made with <span class="heart">❤</span> in Valle Martella</p>
   </div>
 </footer>
 
-<script src="app.js"></script>
+<!-- WHATSAPP FAB -->
+<div id="wa-fab">
+  <div id="wa-menu">
+    <button class="wa-menu-item" id="waReserve"><i class="fas fa-calendar-check"></i> <span data-i18n="wa_reserve">Prenota un Tavolo</span></button>
+    <button class="wa-menu-item" id="waTakeaway"><i class="fas fa-shopping-bag"></i> <span data-i18n="wa_takeaway">Ordina da Asporto</span></button>
+    <button class="wa-menu-item" id="waInfo"><i class="fas fa-info-circle"></i> <span data-i18n="wa_info">Info</span></button>
+  </div>
+  <button class="wa-fab-btn" id="waFabBtn" aria-label="WhatsApp menu"><i class="fab fa-whatsapp"></i></button>
+</div>
+
+<!-- ADMIN PANEL (hidden unless ?admin=true) -->
+<div id="adminPanel" style="display:none;max-width:1000px;margin:0 auto;padding:100px 24px 40px;position:relative;z-index:1">
+  <div class="section-header">
+    <h2 class="gradient-text" data-i18n="admin_title">Admin — Prenotazioni</h2>
+    <div class="section-divider"></div>
+  </div>
+  <div id="adminTableContainer"></div>
+</div>
+
+<script>
+/* ===== TRANSLATIONS ===== */
+var i18n = {
+  it: {
+    splash_sub:'Autentica Cucina Italiana a Valle Martella',
+    nav_home:'Home',nav_menu:'Menu',nav_gallery:'Galleria',nav_location:'Dove Siamo',nav_contacts:'Contatti',
+    hero_badge:'\u{1F1EE}\u{1F1F9} Ristorante Italiano',
+    hero_title_sub:'Ristorante',
+    hero_subtitle:'Un viaggio nei sapori autentici della tradizione italiana, nel cuore di Valle Martella',
+    hero_location_title:'DOVE SIAMO',hero_location_val:'Via Riccardo Lombardi, 1<br>00030 Valle Martella (RM)',
+    hero_hours_title:'ORARI',hero_hours_val:'Lunch 12:30-15:30 · Dinner 18:30-23:00',hero_hours_fri:'Ven-Sab fino 00:00',
+    hero_rating_title:'RECENSIONI',hero_rating_val:'4.3/5',
+    hero_cta_menu:'Esplora il Menu',hero_cta_map:'Come Arrivare',
+    menu_title:'Il Nostro Menu',menu_subtitle:'Esplora le nostre specialità — clicca una categoria per scoprire i piatti',
+    cat_antipasti:'Antipasti',cat_primi:'Primi',cat_secondi:'Secondi',cat_pizza:'Pizza',cat_dolci:'Dolci',
+    panel_view_btn:'Vedi Tutti i Piatti',
+    combo_title:'Menu Speciali',combo_subtitle:'Selezioni pensate per ogni occasione — dall\'intimità alla festa con gli amici',
+    combo_choose:'Scegli Questo',combo_people:'persone',combo_extra:'extra',
+    gallery_title:'Galleria',gallery_subtitle:'Scorri tra le immagini del nostro ristorante, dei nostri piatti e dell\'atmosfera unica',
+    location_title:'Dove Siamo',location_subtitle:'Vieni a trovarci — siamo aperti tutti i giorni',
+    loc_address_title:'Indirizzo',loc_address_val:'Via Riccardo Lombardi, 1<br>00030 Valle Martella (RM)',
+    loc_view_map:'Apri in Google Maps',loc_hours_title:'Orari di Apertura',
+    loc_hours_lunch_label:'Pranzo:',loc_hours_lunch_val:'12:30 – 15:30',loc_hours_dinner_label:'Cena:',loc_hours_dinner_val:'18:30 – 23:00',
+    loc_hours_fri_label:'Ven-Sab:',loc_hours_fri_val:'18:30 – 00:00',loc_hours_open_label:'Apertura:',loc_hours_open_val:'Tutti i giorni',
+    loc_phone_title:'Telefono',loc_view_full_map:'Vedi mappa completa',
+    reserve_cta:'Prenota un Tavolo',reserve_title:'Prenota un Tavolo',
+    reserve_date:'Data',reserve_time:'Ora',reserve_time_placeholder:'Seleziona ora',
+    reserve_guests:'Numero Ospiti',reserve_name:'Nome',reserve_phone:'Telefono',
+    reserve_email:'Email',reserve_optional:'(opzionale)',reserve_notes:'Note',
+    reserve_submit:'Prenota Ora',reserve_success_title:'Prenotazione Confermata!',
+    reserve_success_text:'Grazie, ti abbiamo inviato un riepilogo. Puoi confermare su WhatsApp.',
+    reserve_success_wa:'Conferma su WhatsApp',
+    contatti_title:'Contatti',contatti_subtitle:'Siamo sempre a tua disposizione',
+    contatti_phone_title:'Telefono',contatti_hours_title:'Orari',
+    contatti_hours_lunch:'Pranzo: 12:30 – 15:30',contatti_hours_dinner:'Cena: 18:30 – 23:00',
+    contatti_hours_fri:'Ven-Sab: fino alle 00:00',contatti_hours_open:'Sempre Aperti',
+    contatti_social_title:'Social',contatti_wa_cta:'Scrivici su WhatsApp',
+    footer_tagline:'Autentica cucina italiana dal 1998',
+    footer_contacts_title:'Contatti',footer_hours_title:'Orari',
+    footer_hours_lunch:'Pranzo: 12:30 – 15:30',footer_hours_dinner:'Cena: 18:30 – 23:00',
+    footer_hours_fri:'Ven-Sab: fino alle 00:00',footer_hours_open:'Aperto tutti i giorni',
+    wa_reserve:'Prenota un Tavolo',wa_takeaway:'Ordina da Asporto',wa_info:'Info',
+    admin_title:'Admin — Prenotazioni'
+  },
+  en: {
+    splash_sub:'Authentic Italian Cuisine in Valle Martella',
+    nav_home:'Home',nav_menu:'Menu',nav_gallery:'Gallery',nav_location:'Location',nav_contacts:'Contacts',
+    hero_badge:'\u{1F1EE}\u{1F1F9} Italian Restaurant',
+    hero_title_sub:'Restaurant',
+    hero_subtitle:'A journey through authentic Italian flavors, in the heart of Valle Martella',
+    hero_location_title:'LOCATION',hero_location_val:'Via Riccardo Lombardi, 1<br>00030 Valle Martella (RM)',
+    hero_hours_title:'HOURS',hero_hours_val:'Lunch 12:30-15:30 · Dinner 18:30-23:00',hero_hours_fri:'Fri-Sat until 00:00',
+    hero_rating_title:'RATING',hero_rating_val:'4.3/5',
+    hero_cta_menu:'Explore Menu',hero_cta_map:'Get Directions',
+    menu_title:'Our Menu',menu_subtitle:'Explore our specialties — click a category to discover the dishes',
+    cat_antipasti:'Starters',cat_primi:'First Courses',cat_secondi:'Main Courses',cat_pizza:'Pizza',cat_dolci:'Desserts',
+    panel_view_btn:'View All Dishes',
+    combo_title:'Special Menus',combo_subtitle:'Selections for every occasion — from intimacy to celebration with friends',
+    combo_choose:'Choose This',combo_people:'people',combo_extra:'extra',
+    gallery_title:'Gallery',gallery_subtitle:'Browse images of our restaurant, dishes, and unique atmosphere',
+    location_title:'Location',location_subtitle:'Come visit us — we are open every day',
+    loc_address_title:'Address',loc_address_val:'Via Riccardo Lombardi, 1<br>00030 Valle Martella (RM)',
+    loc_view_map:'Open in Google Maps',loc_hours_title:'Opening Hours',
+    loc_hours_lunch_label:'Lunch:',loc_hours_lunch_val:'12:30 – 15:30',loc_hours_dinner_label:'Dinner:',loc_hours_dinner_val:'18:30 – 23:00',
+    loc_hours_fri_label:'Fri-Sat:',loc_hours_fri_val:'18:30 – 00:00',loc_hours_open_label:'Open:',loc_hours_open_val:'Every day',
+    loc_phone_title:'Phone',loc_view_full_map:'View full map',
+    reserve_cta:'Book a Table',reserve_title:'Book a Table',
+    reserve_date:'Date',reserve_time:'Time',reserve_time_placeholder:'Select time',
+    reserve_guests:'Guests',reserve_name:'Name',reserve_phone:'Phone',
+    reserve_email:'Email',reserve_optional:'(optional)',reserve_notes:'Notes',
+    reserve_submit:'Book Now',reserve_success_title:'Reservation Confirmed!',
+    reserve_success_text:'Thank you, we sent you a summary. You can confirm on WhatsApp.',
+    reserve_success_wa:'Confirm on WhatsApp',
+    contatti_title:'Contacts',contatti_subtitle:'We are always at your disposal',
+    contatti_phone_title:'Phone',contatti_hours_title:'Hours',
+    contatti_hours_lunch:'Lunch: 12:30 – 15:30',contatti_hours_dinner:'Dinner: 18:30 – 23:00',
+    contatti_hours_fri:'Fri-Sat: until 00:00',contatti_hours_open:'Always Open',
+    contatti_social_title:'Social',contatti_wa_cta:'Message us on WhatsApp',
+    footer_tagline:'Authentic Italian cuisine since 1998',
+    footer_contacts_title:'Contacts',footer_hours_title:'Hours',
+    footer_hours_lunch:'Lunch: 12:30 – 15:30',footer_hours_dinner:'Dinner: 18:30 – 23:00',
+    footer_hours_fri:'Fri-Sat: until 00:00',footer_hours_open:'Open every day',
+    wa_reserve:'Book a Table',wa_takeaway:'Takeaway Order',wa_info:'Info',
+    admin_title:'Admin — Reservations'
+  },
+  fr: {
+    splash_sub:'Cuisine Italienne Authentique à Valle Martella',
+    nav_home:'Accueil',nav_menu:'Menu',nav_gallery:'Galerie',nav_location:'Où trouver',nav_contacts:'Contacts',
+    hero_badge:'\u{1F1EE}\u{1F1F9} Restaurant Italien',
+    hero_title_sub:'Restaurant',
+    hero_subtitle:'Un voyage à travers les saveurs authentiques italiennes, au cœur de Valle Martella',
+    hero_location_title:'ADRESSE',hero_location_val:'Via Riccardo Lombardi, 1<br>00030 Valle Martella (RM)',
+    hero_hours_title:'HORAIRES',hero_hours_val:'Déjeuner 12:30-15:30 · Dîner 18:30-23:00',hero_hours_fri:'Ven-Sam jusqu\'à 00:00',
+    hero_rating_title:'NOTE',hero_rating_val:'4.3/5',
+    hero_cta_menu:'Explorer le Menu',hero_cta_map:'Itinéraire',
+    menu_title:'Notre Menu',menu_subtitle:'Explorez nos spécialités — cliquez une catégorie pour découvrir les plats',
+    cat_antipasti:'Entrées',cat_primi:'Premiers Plats',cat_secondi:'Plats Principaux',cat_pizza:'Pizza',cat_dolci:'Desserts',
+    panel_view_btn:'Voir Tous les Plats',
+    combo_title:'Menus Spéciaux',combo_subtitle:'Sélections pour chaque occasion — de l\'intimité à la fête entre amis',
+    combo_choose:'Choisir',combo_people:'personnes',combo_extra:'supplément',
+    gallery_title:'Galerie',gallery_subtitle:'Parcourez les images de notre restaurant, plats et atmosphère unique',
+    location_title:'Où Nous Trouver',location_subtitle:'Venez nous rendre visite — nous sommes ouverts tous les jours',
+    loc_address_title:'Adresse',loc_address_val:'Via Riccardo Lombardi, 1<br>00030 Valle Martella (RM)',
+    loc_view_map:'Ouvrir dans Google Maps',loc_hours_title:'Heures d\'Ouverture',
+    loc_hours_lunch_label:'Déjeuner:',loc_hours_lunch_val:'12:30 – 15:30',loc_hours_dinner_label:'Dîner:',loc_hours_dinner_val:'18:30 – 23:00',
+    loc_hours_fri_label:'Ven-Sam:',loc_hours_fri_val:'18:30 – 00:00',loc_hours_open_label:'Ouverture:',loc_hours_open_val:'Tous les jours',
+    loc_phone_title:'Téléphone',loc_view_full_map:'Voir la carte complète',
+    reserve_cta:'Réserver une Table',reserve_title:'Réserver une Table',
+    reserve_date:'Date',reserve_time:'Heure',reserve_time_placeholder:'Sélectionnez l\'heure',
+    reserve_guests:'Convives',reserve_name:'Nom',reserve_phone:'Téléphone',
+    reserve_email:'Email',reserve_optional:'(facultatif)',reserve_notes:'Notes',
+    reserve_submit:'Réserver',reserve_success_title:'Réservation Confirmée!',
+    reserve_success_text:'Merci, nous vous avons envoyé un récapitulatif. Vous pouvez confirmer sur WhatsApp.',
+    reserve_success_wa:'Confirmer sur WhatsApp',
+    contatti_title:'Contacts',contatti_subtitle:'Nous sommes toujours à votre disposition',
+    contatti_phone_title:'Téléphone',contatti_hours_title:'Horaires',
+    contatti_hours_lunch:'Déjeuner: 12:30 – 15:30',contatti_hours_dinner:'Dîner: 18:30 – 23:00',
+    contatti_hours_fri:'Ven-Sam: jusqu\'à 00:00',contatti_hours_open:'Toujours Ouvert',
+    contatti_social_title:'Social',contatti_wa_cta:'Écrivez-nous sur WhatsApp',
+    footer_tagline:'Cuisine italienne authentique depuis 1998',
+    footer_contacts_title:'Contacts',footer_hours_title:'Horaires',
+    footer_hours_lunch:'Déjeuner: 12:30 – 15:30',footer_hours_dinner:'Dîner: 18:30 – 23:00',
+    footer_hours_fri:'Ven-Sam: jusqu\'à 00:00',footer_hours_open:'Ouvert tous les jours',
+    wa_reserve:'Réserver une Table',wa_takeaway:'Commande à Emporter',wa_info:'Infos',
+    admin_title:'Admin — Réservations'
+  },
+  de: {
+    splash_sub:'Authentische Italienische Küche in Valle Martella',
+    nav_home:'Startseite',nav_menu:'Speisekarte',nav_gallery:'Galerie',nav_location:'Standort',nav_contacts:'Kontakt',
+    hero_badge:'\u{1F1EE}\u{1F1F9} Italienisches Restaurant',
+    hero_title_sub:'Restaurant',
+    hero_subtitle:'Eine Reise durch die authentischen italienischen Aromen, im Herzen von Valle Martella',
+    hero_location_title:'ADRESSE',hero_location_val:'Via Riccardo Lombardi, 1<br>00030 Valle Martella (RM)',
+    hero_hours_title:'ÖFFNUNGSZEITEN',hero_hours_val:'Mittagessen 12:30-15:30 · Abendessen 18:30-23:00',hero_hours_fri:'Fr-Sa bis 00:00',
+    hero_rating_title:'BEWERTUNG',hero_rating_val:'4.3/5',
+    hero_cta_menu:'Speisekarte Entdecken',hero_cta_map:'Anfahrt',
+    menu_title:'Unsere Speisekarte',menu_subtitle:'Entdecken Sie unsere Spezialitäten — klicken Sie auf eine Kategorie',
+    cat_antipasti:'Vorspeisen',cat_primi:'Erste Gänge',cat_secondi:'Hauptgerichte',cat_pizza:'Pizza',cat_dolci:'Desserts',
+    panel_view_btn:'Alle Gerichte Ansehen',
+    combo_title:'Spezialmenüs',combo_subtitle:'Auswahl für jeden Anlass — von Intimität bis zur Feier mit Freunden',
+    combo_choose:'Auswählen',combo_people:'Personen',combo_extra:'extra',
+    gallery_title:'Galerie',gallery_subtitle:'Bilder unseres Restaurants, Gerichte und der einzigartigen Atmosphäre',
+    location_title:'Standort',location_subtitle:'Besuchen Sie uns — wir sind jeden Tag geöffnet',
+    loc_address_title:'Adresse',loc_address_val:'Via Riccardo Lombardi, 1<br>00030 Valle Martella (RM)',
+    loc_view_map:'In Google Maps Öffnen',loc_hours_title:'Öffnungszeiten',
+    loc_hours_lunch_label:'Mittagessen:',loc_hours_lunch_val:'12:30 – 15:30',loc_hours_dinner_label:'Abendessen:',loc_hours_dinner_val:'18:30 – 23:00',
+    loc_hours_fri_label:'Fr-Sa:',loc_hours_fri_val:'18:30 – 00:00',loc_hours_open_label:'Geöffnet:',loc_hours_open_val:'Täglich',
+    loc_phone_title:'Telefon',loc_view_full_map:'Vollständige Karte Anzeigen',
+    reserve_cta:'Tisch Reservieren',reserve_title:'Tisch Reservieren',
+    reserve_date:'Datum',reserve_time:'Uhrzeit',reserve_time_placeholder:'Uhrzeit wählen',
+    reserve_guests:'Gäste',reserve_name:'Name',reserve_phone:'Telefon',
+    reserve_email:'Email',reserve_optional:'(optional)',reserve_notes:'Notizen',
+    reserve_submit:'Jetzt Reservieren',reserve_success_title:'Reservierung Bestätigt!',
+    reserve_success_text:'Vielen Dank! Wir haben Ihnen eine Zusammenfassung gesendet. Sie können auf WhatsApp bestätigen.',
+    reserve_success_wa:'Auf WhatsApp Bestätigen',
+    contatti_title:'Kontakt',contatti_subtitle:'Wir stehen Ihnen jederzeit zur Verfügung',
+    contatti_phone_title:'Telefon',contatti_hours_title:'Öffnungszeiten',
+    contatti_hours_lunch:'Mittagessen: 12:30 – 15:30',contatti_hours_dinner:'Abendessen: 18:30 – 23:00',
+    contatti_hours_fri:'Fr-Sa: bis 00:00',contatti_hours_open:'Immer Geöffnet',
+    contatti_social_title:'Social',contatti_wa_cta:'Schreiben Sie uns auf WhatsApp',
+    footer_tagline:'Authentische italienische Küche seit 1998',
+    footer_contacts_title:'Kontakt',footer_hours_title:'Öffnungszeiten',
+    footer_hours_lunch:'Mittagessen: 12:30 – 15:30',footer_hours_dinner:'Abendessen: 18:30 – 23:00',
+    footer_hours_fri:'Fr-Sa: bis 00:00',footer_hours_open:'Täglich geöffnet',
+    wa_reserve:'Tisch Reservieren',wa_takeaway:'Bestellen zum Mitnehmen',wa_info:'Info',
+    admin_title:'Admin — Reservierungen'
+  }
+};
+
+/* ===== MENU DATA ===== */
+var menuData = {
+  antipasti:{badge:'Antipasti',desc:'Il nostro antipasto perfetto per iniziare il pasto con gusto.',price:'€6 – €16',dishes:[
+    {name:'Bruschetta',price:'€6',emoji:'\u{1F35B}'},
+    {name:'Carpaccio di Manzo',price:'€12',emoji:'\u{1F969}'},
+    {name:'Antipasto di Mare',price:'€14',emoji:'\u{1F41F}'},
+    {name:'Caprese con Burrata',price:'€10',emoji:'\u{1F9C0}'},
+    {name:'Fritto Misto',price:'€12',emoji:'\u{1F35F}'},
+    {name:'Tagliere di Salumi e Formaggi',price:'€16',emoji:'\u{1F9C2}'}
+  ]},
+  primi:{badge:'Primi Piatti',desc:'Pasta fresca e tradizione. I nostri primi piatti raccontano l\'Italia.',price:'€11 – €16',dishes:[
+    {name:'Spaghetti alle Vongole',price:'€14',emoji:'\u{1F41A}'},
+    {name:'Pasta allo Scoglio',price:'€16',emoji:'\u{1F41F}'},
+    {name:'Carbonara Tradizionale',price:'€12',emoji:'\u{1F35D}'},
+    {name:'Amatriciana',price:'€12',emoji:'\u{1F35D}'},
+    {name:'Cacio e Pepe',price:'€11',emoji:'\u{1F35D}'},
+    {name:'Lasagna della Casa',price:'€13',emoji:'\u{1F35D}'}
+  ]},
+  secondi:{badge:'Secondi Piatti',desc:'Carne e pesce preparati con maestria. Il cuore della cucina italiana.',price:'€15 – €22',dishes:[
+    {name:'Filetto di Orata in Crosta',price:'€18',emoji:'\u{1F41F}'},
+    {name:'Grigliata di Pesce',price:'€22',emoji:'\u{1F41F}'},
+    {name:'Tagliata di Manzo',price:'€20',emoji:'\u{1F969}'},
+    {name:'Saltimbocca alla Romana',price:'€18',emoji:'\u{1F357}'},
+    {name:'Pollo alla Cacciatora',price:'€15',emoji:'\u{1F357}'},
+    {name:'Polpo alla Griglia',price:'€19',emoji:'\u{1F419}'}
+  ]},
+  pizza:{badge:'Pizza',desc:'Pizza tradizionale cotta a regola d\'arte. Croccante e saporita.',price:'€6 – €10',dishes:[
+    {name:'Margherita',price:'€7',emoji:'\u{1F355}'},
+    {name:'Marinara',price:'€6',emoji:'\u{1F355}'},
+    {name:'Diavola',price:'€9',emoji:'\u{1F355}'},
+    {name:'Quattro Formaggi',price:'€10',emoji:'\u{1F355}'},
+    {name:'Capricciosa',price:'€10',emoji:'\u{1F355}'},
+    {name:'Pizza al Tegamino',price:'€8',emoji:'\u{1F355}'}
+  ]},
+  dolci:{badge:'Dolci',desc:'Dolci artigianali per concludere in bellezza.',price:'€5 – €6',dishes:[
+    {name:'Tiramisù della Casa',price:'€6',emoji:'\u{1F370}'},
+    {name:'Panna Cotta',price:'€5',emoji:'\u{1F36B}'},
+    {name:'Cannoli Siciliani',price:'€5',emoji:'\u{1F36D}'},
+    {name:'Torta della Nonna',price:'€6',emoji:'\u{1F9C1}'},
+    {name:'Affogato al Caffè',price:'€5',emoji:'\u{2615}'},
+    {name:'Semifreddo al Limone',price:'€6',emoji:'\u{1F34B}'}
+  ]}
+};
+
+/* ===== COMBO DATA ===== */
+var comboData = [
+  {
+    id:'coppia',name:'Menu Coppia',ribbon:'Per Coppia',
+    img:'',price:'€90',priceNote:'(per 2 persone)',
+    items:['Antipasto di Mare per 2','Pasta allo Scoglio ×2','Vino della Casa 1 bottiglia','Tiramisù ×2','Caffè ×2'],
+    basePeople:2,minPeople:2,maxPeople:2,extraPerPerson:null,baseCost:90,peopleEditable:false,priceLabel:'€90'
+  },
+  {
+    id:'famiglia',name:'Menu Famiglia',ribbon:'Per Famiglia',
+    img:'',price:'da €156',priceNote:'(da 4 persone)',
+    items:['Tagliere Misto Grande','Lasagna ×2','Grigliata Mista di Carne','Contorni Misti','Vino 2 bottiglie','Dolci Assortiti ×4'],
+    basePeople:4,minPeople:3,maxPeople:8,extraPerPerson:35,baseCost:156,peopleEditable:true,priceLabel:'€156'
+  },
+  {
+    id:'amici',name:'Menu Amici',ribbon:'Per Amici',
+    img:'',price:'da €69',priceNote:'(base 4 persone)',
+    items:['Bruschette Miste','Pizza Assortita 3 gusti','Fritto Misto','Birra Media a persona','Dolce a Scelta a persona'],
+    basePeople:4,minPeople:3,maxPeople:12,extraPerPerson:10,baseCost:69,peopleEditable:true,priceLabel:'€69'
+  },
+  {
+    id:'chef',name:'Selezione Chef',ribbon:'Signature',
+    img:'',price:'€62',priceNote:'(a persona)',
+    items:['Antipasto dello Chef','Primo del Giorno','Secondo + Contorno','Calice di Vino','Dolce della Casa','Caffè'],
+    basePeople:1,minPeople:1,maxPeople:1,extraPerPerson:null,baseCost:62,peopleEditable:false,priceLabel:'€62/persona'
+  }
+];
+
+/* ===== GALLERY IMAGES ===== */
+var galleryImages = [
+  {url:'',label:'Antipasto di Mare',emoji:'\u{1F41F}'},
+  {url:'',label:'Pasta allo Scoglio',emoji:'\u{1F35D}'},
+  {url:'',label:'Tagliata di Manzo',emoji:'\u{1F969}'},
+  {url:'',label:'Pizza Margherita',emoji:'\u{1F355}'},
+  {url:'',label:'Interno Ristorante',emoji:'\u{1F3E0}'},
+  {url:'',label:'Tiramisù',emoji:'\u{1F370}'},
+  {url:'',label:'Cantina Vini',emoji:'\u{1F377}'},
+  {url:'',label:'Bruschetta',emoji:'\u{1F35B}'},
+  {url:'',label:'Dolci Artigianali',emoji:'\u{1F36D}'}
+];
+
+/* ===== LANGUAGE STATE ===== */
+var currentLang = 'it';
+
+function applyLanguage(lang){
+  currentLang = lang;
+  var t = i18n[lang] || i18n.it;
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    var key = el.getAttribute('data-i18n');
+    if(t[key]) el.innerHTML = t[key];
+  });
+  document.querySelectorAll('.lang-btn').forEach(function(b){
+    b.classList.toggle('active',b.getAttribute('data-lang')===lang);
+  });
+  document.documentElement.lang = lang;
+  if(window.renderCombos) renderCombos();
+}
+
+/* ===== REVEAL SCROLL ANIMATION ===== */
+(function initReveal(){
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(function(el){ observer.observe(el); });
+  window.__observeReveal = function(container){
+    if(container) container.querySelectorAll('.reveal').forEach(function(el){ observer.observe(el); });
+  };
+})();
+
+/* ===== GOLD SPARKLE PARTICLES ===== */
+(function initSparkle(){
+  var container = document.createElement('div');
+  container.className = 'gold-sparkle';
+  container.id = 'goldSparkle';
+  document.body.appendChild(container);
+  for(var i=0;i<30;i++){
+    var span = document.createElement('span');
+    span.style.left = Math.random()*100 + '%';
+    span.style.animationDuration = (8 + Math.random()*15) + 's';
+    span.style.animationDelay = (Math.random()*15) + 's';
+    span.style.width = (2 + Math.random()*4) + 'px';
+    span.style.height = span.style.width;
+    container.appendChild(span);
+  }
+})();
+
+/* ===== CARD TILT PARALLAX ===== */
+(function initTiltCards(){
+  document.querySelectorAll('.combo-card').forEach(function(card){
+    card.addEventListener('mousemove', function(e){
+      var rect = card.getBoundingClientRect();
+      var x = (e.clientX - rect.left) / rect.width - 0.5;
+      var y = (e.clientY - rect.top) / rect.height - 0.5;
+      card.style.transform = 'perspective(600px) rotateY(' + (x * 6) + 'deg) rotateX(' + (-y * 6) + 'deg) translateY(-6px)';
+    });
+    card.addEventListener('mouseleave', function(){
+      card.style.transform = '';
+    });
+  });
+})();
+
+/* ===== STAGGER DISH ANIMATION ===== */
+function animateDishCards(grid){
+  var cards = grid.querySelectorAll('.dish-card');
+  cards.forEach(function(card, i){
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(20px)';
+    setTimeout(function(){
+      card.style.opacity = '1';
+      card.style.transform = 'translateY(0)';
+      card.style.transition = 'all 0.4s cubic-bezier(0.4,0,0.2,1)';
+    }, i * 80);
+  });
+}
+
+/* ===== THREE.JS BACKGROUND ===== */
+(function initThreeBackground(){
+  if(typeof THREE === 'undefined'){
+    var s = document.querySelector('script[src*="three"]');
+    if(s) s.onload = initThreeBackground;
+    return;
+  }
+  var container = document.getElementById('three-canvas');
+  if(!container) return;
+
+  var scene = new THREE.Scene();
+  var camera = new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,0.1,1000);
+  var renderer = new THREE.WebGLRenderer({alpha:true,antialias:true});
+  renderer.setSize(window.innerWidth,window.innerHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+  renderer.setClearColor(0x000000,0);
+  container.appendChild(renderer.domElement);
+
+  // Food-themed floating objects
+  var shapes = [];
+  var goldColors = [0xC9A14A, 0xE0BE6A, 0xD4A84A, 0xB8922F, 0xF5E6B8];
+
+  for(var i=0;i<55;i++){
+    var color = goldColors[Math.floor(Math.random()*goldColors.length)];
+    var mat = new THREE.MeshBasicMaterial({
+      color: color,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.06 + Math.random()*0.1
+    });
+    var mesh;
+    var r = Math.random();
+    
+    if(r < 0.35){
+      // Torus (pasta twirl)
+      var geo = new THREE.TorusGeometry(0.15 + Math.random()*0.15, 0.04 + Math.random()*0.03, 8, 12);
+      mesh = new THREE.Mesh(geo, mat);
+    } else if(r < 0.55){
+      // Cone (wine glass silhouette)
+      var geo = new THREE.ConeGeometry(0.1 + Math.random()*0.12, 0.25 + Math.random()*0.15, 6);
+      mesh = new THREE.Mesh(geo, mat);
+    } else if(r < 0.75){
+      // Small circle/disc (plate)
+      var geo = new THREE.CircleGeometry(0.18 + Math.random()*0.15, 16);
+      mesh = new THREE.Mesh(geo, mat);
+    } else if(r < 0.9){
+      // TorusKnot (fancy pasta)
+      var geo = new THREE.TorusKnotGeometry(0.1 + Math.random()*0.08, 0.03 + Math.random()*0.02, 24, 8);
+      mesh = new THREE.Mesh(geo, mat);
+    } else {
+      // Ring (wine glass rim)
+      var geo = new THREE.RingGeometry(0.12 + Math.random()*0.1, 0.16 + Math.random()*0.12, 16);
+      mesh = new THREE.Mesh(geo, mat);
+    }
+    
+    mesh.position.x = (Math.random()-0.5)*55;
+    mesh.position.y = (Math.random()-0.5)*40;
+    mesh.position.z = (Math.random()-0.5)*50 - 15;
+    mesh.rotation.x = Math.random()*Math.PI*2;
+    mesh.rotation.y = Math.random()*Math.PI*2;
+    var scale = 0.8 + Math.random()*2.5;
+    mesh.scale.set(scale,scale,scale);
+    mesh.userData = {
+      rotSpeedX: (Math.random()-0.5)*0.008,
+      rotSpeedY: (Math.random()-0.5)*0.008,
+      floatAmp: 0.1 + Math.random()*0.3,
+      floatFreq: 0.2 + Math.random()*0.6,
+      floatOffset: Math.random()*Math.PI*2,
+      startY: mesh.position.y
+    };
+    scene.add(mesh);
+    shapes.push(mesh);
+  }
+
+  camera.position.z = 28;
+
+  var mouseX = 0, mouseY = 0;
+  document.addEventListener('mousemove',function(e){
+    mouseX = (e.clientX/window.innerWidth-0.5)*2;
+    mouseY = (e.clientY/window.innerHeight-0.5)*2;
+  });
+
+  var time = 0;
+  function animate(){
+    requestAnimationFrame(animate);
+    time += 0.01;
+
+    var targetX = mouseX * 2;
+    var targetY = mouseY * 1.5;
+    camera.position.x += (targetX - camera.position.x) * 0.02;
+    camera.position.y += (targetY - camera.position.y) * 0.02;
+    camera.lookAt(scene.position);
+
+    meshes.forEach(function(m){
+      m.rotation.x += m.userData.rotSpeedX;
+      m.rotation.y += m.userData.rotSpeedY;
+      m.position.y = m.userData.startY + Math.sin(time * m.userData.floatFreq + m.userData.floatOffset) * m.userData.floatAmp;
+    });
+
+    renderer.render(scene,camera);
+  }
+  animate();
+
+  window.addEventListener('resize',function(){
+    camera.aspect = window.innerWidth/window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth,window.innerHeight);
+  });
+})();
+
+/* ===== SPLASH SCREEN ===== */
+(function(){
+  setTimeout(function(){
+    document.getElementById('splash').classList.add('hidden');
+  },2200);
+})();
+
+/* ===== STICKY NAV ===== */
+(function(){
+  var nav = document.getElementById('sticky-nav');
+  var hero = document.getElementById('hero');
+  var header = document.getElementById('header');
+
+  window.addEventListener('scroll',function(){
+    var heroBottom = hero.getBoundingClientRect().bottom;
+    if(heroBottom < 80){
+      nav.classList.add('visible');
+      header.classList.add('hidden');
+    } else {
+      nav.classList.remove('visible');
+      header.classList.remove('hidden');
+    }
+    updateActiveNav();
+  });
+
+  function updateActiveNav(){
+    var sections = ['hero','menu-circle-section','gallery','location','contatti'];
+    var scrollPos = window.scrollY + 150;
+    var activeId = 'hero';
+    sections.forEach(function(id){
+      var el = document.getElementById(id);
+      if(el && el.offsetTop <= scrollPos) activeId = id;
+    });
+    document.querySelectorAll('.sticky-links a').forEach(function(a){
+      a.classList.toggle('active',a.getAttribute('data-nav')===activeId);
+    });
+  }
+
+  // Smooth scroll for nav links
+  document.querySelectorAll('.sticky-links a, .drawer-links a, .hero-cta a[href^="#"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var href = this.getAttribute('href');
+      if(href && href.startsWith('#')){
+        e.preventDefault();
+        var target = document.querySelector(href);
+        if(target) target.scrollIntoView({behavior:'smooth'});
+      }
+    });
+  });
+})();
+
+/* ===== MOBILE HAMBURGER ===== */
+(function(){
+  var btn = document.getElementById('hamburger-btn');
+  var drawer = document.getElementById('mobile-drawer');
+  var overlay = document.getElementById('drawer-overlay');
+  var closeBtn = document.getElementById('drawer-close');
+
+  function openDrawer(){
+    drawer.classList.add('open');
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeDrawer(){
+    drawer.classList.remove('open');
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  if(btn) btn.addEventListener('click',openDrawer);
+  if(closeBtn) closeBtn.addEventListener('click',closeDrawer);
+  if(overlay) overlay.addEventListener('click',closeDrawer);
+
+  document.querySelectorAll('.drawer-links a').forEach(function(a){
+    a.addEventListener('click',closeDrawer);
+  });
+})();
+
+/* ===== LANGUAGE SWITCHER ===== */
+(function(){
+  document.querySelectorAll('.lang-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      applyLanguage(this.getAttribute('data-lang'));
+    });
+  });
+})();
+
+/* ===== SCROLL REVEAL ===== */
+(function(){
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  },{threshold:0.1});
+
+  document.querySelectorAll('.reveal').forEach(function(el){
+    observer.observe(el);
+  });
+  window.__scrollObserver = observer;
+})();
+
+/* ===== CIRCLE INTERACTIVE MENU ===== */
+(function(){
+  var circle = document.getElementById('menuCircle');
+  var toggleBtn = document.getElementById('circleToggle');
+  var panel = document.getElementById('circle-side-panel');
+  var isPaused = false;
+
+  // Position items at 72° intervals
+  var items = circle.querySelectorAll('.menu-circle-item');
+  items.forEach(function(item,i){
+    var angle = i * 72;
+    var rad = angle * Math.PI / 180;
+    var r = circle.offsetWidth / 2 - 40;
+    var x = Math.sin(rad) * r;
+    var y = -Math.cos(rad) * r;
+    item.style.transform = 'translate('+x+'px,'+y+'px)';
+    item.style.left = '50%';
+    item.style.top = '50%';
+    item.style.marginLeft = '-40px';
+    item.style.marginTop = '-40px';
+  });
+
+  // Recalculate on resize
+  window.addEventListener('resize',function(){
+    var r2 = circle.offsetWidth / 2 - 40;
+    items.forEach(function(item,i){
+      var angle = i * 72;
+      var rad = angle * Math.PI / 180;
+      var x = Math.sin(rad) * r2;
+      var y = -Math.cos(rad) * r2;
+      item.style.transform = 'translate('+x+'px,'+y+'px)';
+    });
+  });
+
+  toggleBtn.addEventListener('click',function(){
+    isPaused = !isPaused;
+    circle.classList.toggle('paused',isPaused);
+    toggleBtn.innerHTML = isPaused ? '<i class="fas fa-play"></i>' : '<i class="fas fa-pause"></i>';
+  });
+
+  // Category click -> side panel
+  var categories = Object.keys(menuData);
+  items.forEach(function(item,i){
+    item.addEventListener('click',function(){
+      showPanel(categories[i]);
+    });
+  });
+
+  function showPanel(cat){
+    var data = menuData[cat];
+    if(!data) return;
+    var t = i18n[currentLang] || i18n.it;
+    document.getElementById('panelBadge').textContent = data.badge;
+    document.getElementById('panelTitle').textContent = data.badge;
+    document.getElementById('panelDesc').textContent = data.desc;
+    document.getElementById('panelPrice').textContent = data.price;
+    panel.classList.add('visible');
+    panel.scrollIntoView({behavior:'smooth',block:'nearest'});
+
+    document.getElementById('panelViewBtn').onclick = function(){
+      openMenuModal(cat);
+    };
+  }
+
+  // Also allow opening panel from first circle item state
+  window.__showMenuPanel = showPanel;
+})();
+
+/* ===== MENU MODAL ===== */
+function openMenuModal(category){
+  var data = menuData[category];
+  if(!data) return;
+  var t = i18n[currentLang] || i18n.it;
+  var catName = t['cat_'+category] || category;
+  document.getElementById('menuModalTitle').textContent = catName;
+
+  var grid = document.getElementById('menuModalGrid');
+  grid.innerHTML = '';
+  data.dishes.forEach(function(dish){
+    var card = document.createElement('div');
+    card.className = 'dish-card';
+    card.innerHTML = '<div class="dish-placeholder">'+dish.emoji+'</div>'+
+      '<div class="dish-name">'+dish.name+'</div>'+
+      '<div class="dish-price">'+dish.price+'</div>'+
+      '<div class="dish-desc">'+data.badge+'</div>';
+    grid.appendChild(card);
+  });
+
+  document.getElementById('menuModal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+  
+  // Stagger entrance animation
+  setTimeout(function(){ animateDishCards(grid); }, 50);
+}
+
+(function(){
+  var modal = document.getElementById('menuModal');
+  var closeBtn = document.getElementById('menuModalClose');
+
+  function closeModal(){
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  closeBtn.addEventListener('click',closeModal);
+  modal.addEventListener('click',function(e){
+    if(e.target === modal) closeModal();
+  });
+  document.addEventListener('keydown',function(e){
+    if(e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+  });
+})();
+
+/* ===== COMBO MENUS ===== */
+function renderCombos(){
+  var grid = document.getElementById('comboGrid');
+  if(!grid) return;
+  grid.innerHTML = '';
+
+  var comboBgColors = {
+    coppia:'linear-gradient(135deg,rgba(201,161,74,0.15),rgba(0,0,0,0.6)),url(\'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="70" font-size="50" text-anchor="middle" x="50">🍷</text></svg>\')',
+    famiglia:'linear-gradient(135deg,rgba(201,161,74,0.12),rgba(0,0,0,0.6)),url(\'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="70" font-size="50" text-anchor="middle" x="50">🍝</text></svg>\')',
+    amici:'linear-gradient(135deg,rgba(201,161,74,0.12),rgba(0,0,0,0.6)),url(\'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="70" font-size="50" text-anchor="middle" x="50">🍕</text></svg>\')',
+    chef:'linear-gradient(135deg,rgba(201,161,74,0.15),rgba(0,0,0,0.6)),url(\'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="70" font-size="50" text-anchor="middle" x="50">👨‍🍳</text></svg>\')'
+  };
+
+  comboData.forEach(function(combo,idx){
+    var card = document.createElement('div');
+    card.className = 'combo-card reveal';
+    var itemsHTML = combo.items.map(function(it){return '<li>'+it+'</li>';}).join('');
+
+    var peopleText = combo.peopleEditable ? '('+combo.minPeople+'-'+combo.maxPeople+' '+(i18n[currentLang].combo_people||'persone')+')' : '';
+
+    card.innerHTML = '<div class="combo-ribbon">'+combo.ribbon+'</div>'+
+      '<div class="combo-img" style="background:'+(comboBgColors[combo.id]||'linear-gradient(135deg,rgba(201,161,74,0.1),#111)')+'">'+
+      '<h4>'+combo.name+'</h4></div>'+
+      '<div class="combo-body"><ul class="combo-features">'+itemsHTML+'</ul>'+
+      '<div class="combo-price">'+combo.price+' <small>'+combo.priceNote+'</small></div>'+
+      '<button class="combo-btn" data-combo-idx="'+idx+'">'+i18n[currentLang].combo_choose+'</button></div>';
+    grid.appendChild(card);
+
+    // Observe reveal
+    if(window.__scrollObserver) window.__scrollObserver.observe(card);
+
+    // Click
+    card.querySelector('.combo-btn').addEventListener('click',function(){
+      openComboModal(idx);
+    });
+  });
+}
+
+function openComboModal(idx){
+  var combo = comboData[idx];
+  if(!combo) return;
+  document.getElementById('comboModalTitle').textContent = combo.name;
+
+  var body = document.getElementById('comboModalBody');
+  var detailHTML = '<div style="margin-bottom:16px">';
+  combo.items.forEach(function(it){
+    detailHTML += '<div class="detail-row"><span class="detail-label"><i class="fas fa-check" style="color:#22c55e;margin-right:8px"></i>'+it+'</span></div>';
+  });
+  detailHTML += '</div>';
+
+  var currentPeople = combo.basePeople;
+  var totalPrice = combo.baseCost;
+
+  if(combo.peopleEditable){
+    detailHTML += '<div class="combo-people-selector">'+
+      '<button class="combo-people-minus" data-combo-idx="'+idx+'"><i class="fas fa-minus"></i></button>'+
+      '<span class="combo-people-count" id="comboPeopleCount">'+currentPeople+'</span>'+
+      '<button class="combo-people-plus" data-combo-idx="'+idx+'"><i class="fas fa-plus"></i></button>'+
+      '</div>';
+  }
+
+  detailHTML += '<div class="combo-total" id="comboTotalDisplay">'+(combo.peopleEditable ? '€'+totalPrice : combo.price)+' <small>'+(combo.peopleEditable ? 'totale' : combo.priceNote)+'</small></div>';
+  detailHTML += '<textarea class="combo-note-textarea" id="comboNote" placeholder="'+i18n[currentLang].reserve_notes+'"></textarea>';
+  detailHTML += '<button class="combo-wa-btn" id="comboWaBtn"><i class="fab fa-whatsapp"></i> Ordina Ora</button>';
+
+  body.innerHTML = detailHTML;
+
+  var modal = document.getElementById('comboModal');
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+
+  if(combo.peopleEditable){
+    var countEl = document.getElementById('comboPeopleCount');
+    var totalEl = document.getElementById('comboTotalDisplay');
+
+    body.querySelector('.combo-people-minus').addEventListener('click',function(){
+      if(currentPeople > combo.minPeople){
+        currentPeople--;
+        var extra = (currentPeople - combo.basePeople) * combo.extraPerPerson;
+        totalPrice = combo.baseCost + extra;
+        countEl.textContent = currentPeople;
+        totalEl.innerHTML = '€'+totalPrice+' <small>totale ('+currentPeople+' '+(i18n[currentLang].combo_people||'persone')+')</small>';
+      }
+    });
+
+    body.querySelector('.combo-people-plus').addEventListener('click',function(){
+      if(currentPeople < combo.maxPeople){
+        currentPeople++;
+        var extra = (currentPeople - combo.basePeople) * combo.extraPerPerson;
+        totalPrice = combo.baseCost + extra;
+        countEl.textContent = currentPeople;
+        totalEl.innerHTML = '€'+totalPrice+' <small>totale ('+currentPeople+' '+(i18n[currentLang].combo_people||'persone')+')</small>';
+      }
+    });
+  }
+
+  document.getElementById('comboWaBtn').addEventListener('click',function(){
+    var note = document.getElementById('comboNote') ? document.getElementById('comboNote').value : '';
+    var msg = 'Ciao! Vorrei ordinare il ' + combo.name;
+    if(combo.peopleEditable && currentPeople) msg += ' per ' + currentPeople + ' persone';
+    msg += ' (€' + (combo.peopleEditable ? totalPrice : combo.baseCost) + ')';
+    if(note) msg += '. Note: ' + note;
+    window.open('https://wa.me/393474329466?text='+encodeURIComponent(msg),'_blank');
+  });
+}
+
+(function(){
+  var modal = document.getElementById('comboModal');
+  var closeBtn = document.getElementById('comboModalClose');
+
+  function closeModal(){
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  closeBtn.addEventListener('click',closeModal);
+  modal.addEventListener('click',function(e){
+    if(e.target === modal) closeModal();
+  });
+  document.addEventListener('keydown',function(e){
+    if(e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+  });
+})();
+
+/* ===== GALLERY ===== */
+(function(){
+  var grid = document.getElementById('galleryGrid');
+  var lightbox = document.getElementById('lightbox');
+  var lbImg = document.getElementById('lbImg');
+  var lbCounter = document.getElementById('lbCounter');
+  var currentIdx = 0;
+
+  function renderGallery(){
+    grid.innerHTML = '';
+    galleryImages.forEach(function(img,i){
+      var item = document.createElement('div');
+      item.className = 'gallery-item';
+      item.style.background = 'var(--card)';
+      if(img.url){
+        item.innerHTML = '<img src="'+img.url+'" alt="'+img.label+'" loading="lazy">';
+      } else {
+        item.innerHTML = '<div class="gallery-placeholder">'+img.emoji+'</div>';
+      }
+      item.innerHTML += '<div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>';
+      item.addEventListener('click',function(){ openLightbox(i); });
+      grid.appendChild(item);
+    });
+  }
+
+  function openLightbox(idx){
+    currentIdx = idx;
+    var img = galleryImages[idx];
+    if(img.url){
+      lbImg.src = img.url;
+    } else {
+      lbImg.src = 'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400"><rect fill="%231a1a1a" width="400" height="400"/><text x="200" y="200" text-anchor="middle" dominant-baseline="central" font-size="80">'+img.emoji+'</text></svg>');
+    }
+    lbImg.alt = img.label;
+    lbCounter.textContent = (idx+1)+' / '+galleryImages.length;
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox(){
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function prevImg(){
+    currentIdx = (currentIdx - 1 + galleryImages.length) % galleryImages.length;
+    openLightbox(currentIdx);
+  }
+
+  function nextImg(){
+    currentIdx = (currentIdx + 1) % galleryImages.length;
+    openLightbox(currentIdx);
+  }
+
+  renderGallery();
+
+  document.getElementById('lbClose').addEventListener('click',closeLightbox);
+  document.getElementById('lbPrev').addEventListener('click',prevImg);
+  document.getElementById('lbNext').addEventListener('click',nextImg);
+  lightbox.addEventListener('click',function(e){
+    if(e.target === lightbox) closeLightbox();
+  });
+  document.addEventListener('keydown',function(e){
+    if(!lightbox.classList.contains('active')) return;
+    if(e.key === 'Escape') closeLightbox();
+    if(e.key === 'ArrowLeft') prevImg();
+    if(e.key === 'ArrowRight') nextImg();
+  });
+})();
+
+/* ===== RESERVATION FORM ===== */
+(function(){
+  var modal = document.getElementById('reserveModal');
+  var openBtn = document.getElementById('openReserveBtn');
+  var closeBtn = document.getElementById('reserveModalClose');
+  var form = document.getElementById('reserveForm');
+  var successDiv = document.getElementById('reserveSuccess');
+  var dateInput = document.getElementById('reserveDate');
+  var timeSelect = document.getElementById('reserveTime');
+  var guestCount = document.getElementById('guestCount');
+  var guestMinus = document.getElementById('guestMinus');
+  var guestPlus = document.getElementById('guestPlus');
+  var waConfirm = document.getElementById('reserveWaConfirm');
+
+  var guests = 2;
+
+  // Set date range: tomorrow + 30 days
+  function initDates(){
+    var today = new Date();
+    var tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    var maxDate = new Date(today);
+    maxDate.setDate(maxDate.getDate() + 30);
+    dateInput.min = tomorrow.toISOString().split('T')[0];
+    dateInput.max = maxDate.toISOString().split('T')[0];
+    dateInput.value = tomorrow.toISOString().split('T')[0];
+    populateTimes();
+  }
+
+  function populateTimes(){
+    timeSelect.innerHTML = '';
+    var placeholder = document.createElement('option');
+    placeholder.value = '';
+    placeholder.disabled = true;
+    placeholder.selected = true;
+    placeholder.textContent = i18n[currentLang].reserve_time_placeholder || 'Seleziona ora';
+    timeSelect.appendChild(placeholder);
+
+    // Lunch
+    for(var h=12;h<=15;h++){
+      for(var m=0;m<60;m+=30){
+        if(h===15 && m>0) break;
+        var t = ('0'+h).slice(-2)+':'+('0'+m).slice(-2);
+        var opt = document.createElement('option');
+        opt.value = t;
+        opt.textContent = t;
+        if(h<15) opt.setAttribute('data-period','lunch');
+        else opt.setAttribute('data-period','dinner');
+        timeSelect.appendChild(opt);
+      }
+    }
+    // Dinner
+    for(var h2=18;h2<=22;h2++){
+      for(var m2=0;m2<60;m2+=30){
+        var t2 = ('0'+h2).slice(-2)+':'+('0'+m2).slice(-2);
+        var opt2 = document.createElement('option');
+        opt2.value = t2;
+        opt2.textContent = t2;
+        opt2.setAttribute('data-period','dinner');
+        timeSelect.appendChild(opt2);
+      }
+    }
+    timeSelect.value = '19:30';
+  }
+
+  guestMinus.addEventListener('click',function(){
+    if(guests>1){guests--;guestCount.textContent=guests;}
+  });
+  guestPlus.addEventListener('click',function(){
+    if(guests<20){guests++;guestCount.textContent=guests;}
+  });
+
+  // Open modal
+  openBtn.addEventListener('click',function(){
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    initDates();
+    // Load saved data
+    var saved = localStorage.getItem('labonta_reservations');
+    if(saved){
+      try{
+        var data = JSON.parse(saved);
+        if(data.length>0){
+          var last = data[data.length-1];
+          if(last.name) document.getElementById('reserveName').value = last.name;
+          if(last.phone) document.getElementById('reservePhone').value = last.phone;
+          if(last.email) document.getElementById('reserveEmail').value = last.email;
+        }
+      }catch(e){}
+    }
+    successDiv.classList.remove('show');
+    form.style.display = '';
+  });
+
+  function closeModal(){
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  closeBtn.addEventListener('click',closeModal);
+  modal.addEventListener('click',function(e){
+    if(e.target === modal) closeModal();
+  });
+  document.addEventListener('keydown',function(e){
+    if(e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+  });
+
+  // Form submit
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var date = dateInput.value;
+    var time = timeSelect.value;
+    var name = document.getElementById('reserveName').value.trim();
+    var phone = document.getElementById('reservePhone').value.trim();
+    var email = document.getElementById('reserveEmail').value.trim();
+    var notes = document.getElementById('reserveNotes').value.trim();
+
+    // Italian phone validation
+    var phoneOk = /^(\+39\s?)?3\d{2}[\s-]?\d{6,7}$/.test(phone) || /^(\+39\s?)?0\d{1,4}[\s-]?\d{5,8}$/.test(phone);
+    if(!phoneOk && phone.length < 6){
+      alert('Inserisci un numero di telefono valido');
+      return;
+    }
+    if(!name || name.length < 2){
+      alert('Inserisci il tuo nome');
+      return;
+    }
+
+    var reservation = {
+      id: Date.now(),
+      date: date,
+      time: time,
+      guests: guests,
+      name: name,
+      phone: phone,
+      email: email,
+      notes: notes,
+      created: new Date().toISOString()
+    };
+
+    // Save to localStorage
+    var reservations = [];
+    var saved = localStorage.getItem('labonta_reservations');
+    if(saved) try{reservations = JSON.parse(saved);}catch(e){}
+    reservations.push(reservation);
+    localStorage.setItem('labonta_reservations',JSON.stringify(reservations));
+
+    // Show success
+    form.style.display = 'none';
+    successDiv.classList.add('show');
+
+    var msg = 'Ciao! Confermo la prenotazione per '+name+'.\nData: '+date+'\nOra: '+time+'\nOspiti: '+guests;
+    if(notes) msg += '\nNote: '+notes;
+    waConfirm.href = 'https://wa.me/393474329466?text='+encodeURIComponent(msg);
+
+    // Reset form
+    setTimeout(function(){
+      form.reset();
+      guestCount.textContent = '2';
+      guests=2;
+    },100);
+  });
+
+  initDates();
+})();
+
+/* ===== WHATSAPP FAB ===== */
+(function(){
+  var fabBtn = document.getElementById('waFabBtn');
+  var waMenu = document.getElementById('wa-menu');
+  var isOpen = false;
+
+  fabBtn.addEventListener('click',function(){
+    isOpen = !isOpen;
+    waMenu.classList.toggle('open',isOpen);
+  });
+
+  document.getElementById('waReserve').addEventListener('click',function(){
+    waMenu.classList.remove('open');
+    isOpen = false;
+    document.getElementById('openReserveBtn').click();
+  });
+
+  document.getElementById('waTakeaway').addEventListener('click',function(){
+    waMenu.classList.remove('open');
+    isOpen = false;
+    var msg = 'Ciao! Vorrei ordinare da asporto. Potreste mandarmi il menu del giorno? Grazie!';
+    window.open('https://wa.me/393474329466?text='+encodeURIComponent(msg),'_blank');
+  });
+
+  document.getElementById('waInfo').addEventListener('click',function(){
+    waMenu.classList.remove('open');
+    isOpen = false;
+    var msg = 'Ciao! Vorrei ricevere informazioni su orari, menu e disponibilità. Grazie!';
+    window.open('https://wa.me/393474329466?text='+encodeURIComponent(msg),'_blank');
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener('click',function(e){
+    if(isOpen && !fabBtn.contains(e.target) && !waMenu.contains(e.target)){
+      waMenu.classList.remove('open');
+      isOpen = false;
+    }
+  });
+})();
+
+/* ===== ADMIN PANEL ===== */
+(function(){
+  if(window.location.search.indexOf('admin=true') !== -1){
+    document.getElementById('adminPanel').style.display = 'block';
+    renderAdminTable();
+  }
+
+  function renderAdminTable(){
+    var container = document.getElementById('adminTableContainer');
+    var saved = localStorage.getItem('labonta_reservations');
+    var reservations = [];
+    if(saved) try{reservations = JSON.parse(saved);}catch(e){}
+
+    if(reservations.length === 0){
+      container.innerHTML = '<p style="text-align:center;color:#666;padding:40px">Nessuna prenotazione trovata.</p>';
+      return;
+    }
+
+    var html = '<table class="admin-table"><thead><tr>'+
+      '<th>ID</th><th>Data</th><th>Ora</th><th>Ospiti</th><th>Nome</th><th>Telefono</th><th>Email</th><th>Note</th>'+
+      '</tr></thead><tbody>';
+
+    reservations.forEach(function(r){
+      html += '<tr><td>'+r.id+'</td><td>'+r.date+'</td><td>'+r.time+'</td><td>'+r.guests+'</td><td>'+r.name+'</td><td>'+r.phone+'</td><td>'+(r.email||'-')+'</td><td>'+(r.notes||'-')+'</td></tr>';
+    });
+
+    html += '</tbody></table>';
+    container.innerHTML = html;
+  }
+})();
+
+/* ===== RESIZE FIX FOR CIRCLE ===== */
+(function(){
+  var resizeTimer;
+  window.addEventListener('resize',function(){
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function(){
+      var circle = document.getElementById('menuCircle');
+      var items = circle.querySelectorAll('.menu-circle-item');
+      var r = circle.offsetWidth / 2 - 40;
+      items.forEach(function(item,i){
+        var angle = i * 72;
+        var rad = angle * Math.PI / 180;
+        var x = Math.sin(rad) * r;
+        var y = -Math.cos(rad) * r;
+        item.style.transform = 'translate('+x+'px,'+y+'px)';
+      });
+    },200);
+  });
+})();
+
+/* ===== INIT ===== */
+renderCombos();
+applyLanguage('it');
+</script>
 </body>
 </html>
