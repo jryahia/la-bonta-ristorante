@@ -2,7 +2,7 @@
 
 Premium Italian restaurant website — an immersive, single-file experience with a luxury dark-gold aesthetic, full multilingual support, and rich interactive features.
 
-> 🍷 **Demo live:** [https://jryahia.github.io/la-bonta-ristorante/](https://jryahia.github.io/la-bonta-ristorante/) — hosted on GitHub Pages
+> <svg style="display:inline-block;width:1em;height:1em;vertical-align:-0.125em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 22h8"/><path d="M12 11v11"/><path d="M10 22V9a4 4 0 014-4 4 4 0 014 4v13"/></svg> **Demo live:** [https://jryahia.github.io/la-bonta-ristorante/](https://jryahia.github.io/la-bonta-ristorante/) — hosted on GitHub Pages
 
 ![La Bontà — anteprima](https://github.com/jryahia/la-bonta-ristorante/raw/main/preview.png)
 
