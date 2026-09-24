@@ -9,6 +9,6 @@ echo  =============================================
 echo.
 echo  Apertura del sito web...
 echo.
-start index.html
+start "" "public\index.html"
 echo  Fatto! Il sito si sta aprendo nel browser.
 echo.

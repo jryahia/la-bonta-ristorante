@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="La Bontà Ristorante — Autentica cucina italiana a Valle Martella, Roma. Antipasti, primi, secondi, pizza, dolci e menu speciali. Prenota ora.">
+<meta name="theme-color" content="#000000">
+<meta name="color-scheme" content="dark">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<title>La Bontà Ristorante — Cucina Italiana a Valle Martella</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet" media="print" data-async-css>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha384-iw3OoTErCYJJB9mCa8LNS2hbsQ7M3C0EpIsO/H5+EGAkPGc6rk+V8i04oW/K5xq0" crossorigin="anonymous" referrerpolicy="no-referrer" media="print" data-async-css>
+<link rel="stylesheet" href="css/styles.css">
+<script src="js/boot.js"></script>
+</head>
+<body>
+
+<!-- SPLASH SCREEN -->
+<div id="splash" aria-hidden="true">
+  <div class="splash-content">
+    <div class="splash-logo">LA BONTÀ</div>
+    <div class="splash-sub" data-i18n="splash_sub">Autentica Cucina Italiana a Valle Martella</div>
+    <div class="splash-utensils" aria-hidden="true"><i class="fas fa-utensils"></i></div>
+  </div>
+</div>
+
+<!-- THREE.JS CANVAS CONTAINER -->
+<div id="three-canvas" aria-hidden="true"></div>
+
+<!-- HEADER -->
+<header id="header">
+  <div class="header-left">
+    <div class="header-logo"><i class="fas fa-utensils"></i> La Bontà</div>
+  </div>
+  <div class="header-right">
+    <button class="lang-btn active" data-lang="it" title="Italiano">IT</button>
+    <button class="lang-btn" data-lang="en" title="English">EN</button>
+    <button class="lang-btn" data-lang="fr" title="Français">FR</button>
+    <button class="lang-btn" data-lang="de" title="Deutsch">DE</button>
+    <a href="tel:+393474329466" class="header-phone" aria-label="Chiama +39 347 432 9466"><i class="fas fa-phone"></i> <span>+39 347 432 9466</span></a>
+  </div>
+</header>
+
+<!-- STICKY NAV -->
+<nav id="sticky-nav">
+  <div class="sticky-logo">La Bontà</div>
+  <div class="sticky-links">
+    <a href="#hero" data-nav="hero" data-i18n="nav_home">Home</a>
+    <a href="#menu-circle-section" data-nav="menu" data-i18n="nav_menu">Menu</a>
+    <a href="#gallery" data-nav="gallery" data-i18n="nav_gallery">Galleria</a>
+    <a href="#location" data-nav="location" data-i18n="nav_location">Dove Siamo</a>
+    <a href="#contatti" data-nav="contatti" data-i18n="nav_contacts">Contatti</a>
+  </div>
+  <button class="nav-hamburger" id="hamburger-btn" aria-label="Menu"><i class="fas fa-bars"></i></button>
+</nav>
+
+<!-- MOBILE DRAWER -->
+<div id="drawer-overlay"></div>
+<div id="mobile-drawer">
+  <button class="drawer-close" id="drawer-close" aria-label="Chiudi menu"><i class="fas fa-times"></i></button>
+  <div class="drawer-links">
+    <a href="#hero" data-i18n="nav_home">Home</a>
+    <a href="#menu-circle-section" data-i18n="nav_menu">Menu</a>
+    <a href="#gallery" data-i18n="nav_gallery">Galleria</a>
+    <a href="#location" data-i18n="nav_location">Dove Siamo</a>
+    <a href="#contatti" data-i18n="nav_contacts">Contatti</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <i class="fas fa-utensils hero-deco hero-deco-1"></i>
+  <i class="fas fa-wine-glass hero-deco hero-deco-2"></i>
+  <i class="fas fa-pizza-slice hero-deco hero-deco-3"></i>
+  <div class="hero-content">
+    <div class="hero-badge"><span class="flag-it" aria-hidden="true"></span> <span data-i18n="hero_badge">Ristorante Italiano</span></div>
+    <h1 class="hero-title"><span class="gradient-text">La Bontà</span> <span data-i18n="hero_title_sub">Ristorante</span></h1>
+    <p class="hero-subtitle" data-i18n="hero_subtitle">Un viaggio nei sapori autentici della tradizione italiana, nel cuore di Valle Martella</p>
+    <div class="hero-info-cards">
+      <div class="hero-info-card">
+        <i class="fas fa-location-dot"></i>
+        <h2 data-i18n="hero_location_title">DOVE SIAMO</h2>
+        <p data-i18n="hero_location_val">Via Riccardo Lombardi, 1<br>00030 Valle Martella (RM)</p>
+      </div>
+      <div class="hero-info-card">
+        <i class="fas fa-clock"></i>
+        <h2 data-i18n="hero_hours_title">ORARI</h2>
+        <p><span data-i18n="hero_hours_val">Pranzo 12:30-15:30 · Cena 18:30-23:00</span><br><span data-i18n="hero_hours_fri">Ven-Sab fino 00:00</span></p>
+      </div>
+      <div class="hero-info-card">
+        <i class="fas fa-star"></i>
+        <h2 data-i18n="hero_rating_title">RECENSIONI</h2>
+        <p data-i18n="hero_rating_val">4.3/5</p>
+        <div class="stars"><svg class="ico" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg><svg class="ico" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg><svg class="ico" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg><svg class="ico" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg><svg class="ico" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg></div>
+      </div>
+    </div>
+    <div class="hero-cta">
+      <a href="#menu-circle-section" class="btn btn-primary" data-i18n="hero_cta_menu">Esplora il Menu</a>
+      <a href="https://maps.app.goo.gl/krswxMJfJtvFPN9j8" target="_blank" rel="noopener noreferrer" class="btn btn-outline" data-i18n="hero_cta_map">Come Arrivare</a>
+    </div>
+  </div>
+  <div class="scroll-indicator"><i class="fas fa-chevron-down"></i></div>
+</section>
+
+<!-- CIRCLE INTERACTIVE MENU -->
+<section id="menu-circle-section" class="section">
+  <div class="section-header reveal">
+    <h2 class="gradient-text" data-i18n="menu_title">Il Nostro Menu</h2>
+    <div class="section-divider"></div>
+    <p data-i18n="menu_subtitle">Esplora le nostre specialità — clicca una categoria per scoprire i piatti</p>
+  </div>
+
+  <div class="menu-circle-wrapper reveal">
+    <div class="menu-circle" id="menuCircle">
+      <button type="button" class="menu-circle-item" data-category="antipasti">
+        <i class="fas fa-plate-wheat"></i>
+        <span data-i18n="cat_antipasti">Antipasti</span>
+      </button>
+      <button type="button" class="menu-circle-item" data-category="primi">
+        <i class="fas fa-utensils"></i>
+        <span data-i18n="cat_primi">Primi</span>
+      </button>
+      <button type="button" class="menu-circle-item" data-category="secondi">
+        <i class="fas fa-drumstick-bite"></i>
+        <span data-i18n="cat_secondi">Secondi</span>
+      </button>
+      <button type="button" class="menu-circle-item" data-category="pizza">
+        <i class="fas fa-pizza-slice"></i>
+        <span data-i18n="cat_pizza">Pizza</span>
+      </button>
+      <button type="button" class="menu-circle-item" data-category="dolci">
+        <i class="fas fa-cake-candles"></i>
+        <span data-i18n="cat_dolci">Dolci</span>
+      </button>
+      <div class="menu-circle-center">
+        <span>LA BONTÀ</span>
+        <button class="toggle-btn" id="circleToggle" aria-label="Pause/Play rotation"><i class="fas fa-pause"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Side Panel -->
+  <div id="circle-side-panel" class="reveal">
+    <span class="side-panel-badge" id="panelBadge"></span>
+    <h3 class="side-panel-title" id="panelTitle"></h3>
+    <p class="side-panel-desc" id="panelDesc"></p>
+    <p class="side-panel-price" id="panelPrice"></p>
+    <button class="side-panel-btn" id="panelViewBtn" ><span data-i18n="panel_view_btn">Vedi Tutti i Piatti</span> <i class="fas fa-arrow-right" aria-hidden="true"></i></button>
+  </div>
+</section>
+
+<!-- FULL MENU MODAL -->
+<div class="modal-overlay" id="menuModal">
+  <div class="modal" role="dialog" aria-label="Menu category">
+    <button class="modal-close" id="menuModalClose" aria-label="Chiudi"><i class="fas fa-xmark" aria-hidden="true"></i></button>
+    <h3 class="gradient-text" id="menuModalTitle"></h3>
+    <div class="dish-grid" id="menuModalGrid"></div>
+  </div>
+</div>
+
+<!-- COMBO MENUS -->
+<section id="combo-section">
+  <div class="section-header reveal">
+    <h2 class="gradient-text" data-i18n="combo_title">Menu Speciali</h2>
+    <div class="section-divider"></div>
+    <p data-i18n="combo_subtitle">Selezioni pensate per ogni occasione — dall'intimità alla festa con gli amici</p>
+  </div>
+  <div class="combo-grid" id="comboGrid"></div>
+</section>
+
+<!-- COMBO MODAL -->
+<div class="modal-overlay" id="comboModal">
+  <div class="modal combo-modal-detail" role="dialog" aria-label="Combo details">
+    <button class="modal-close" id="comboModalClose" aria-label="Chiudi"><i class="fas fa-xmark" aria-hidden="true"></i></button>
+    <h3 class="gradient-text" id="comboModalTitle"></h3>
+    <div id="comboModalBody"></div>
+  </div>
+</div>
+
+<!-- GALLERY -->
+<section id="gallery" class="section">
+  <div class="section-header reveal">
+    <h2 class="gradient-text" data-i18n="gallery_title">Galleria</h2>
+    <div class="section-divider"></div>
+    <p data-i18n="gallery_subtitle">Scorri tra le immagini del nostro ristorante, dei nostri piatti e dell'atmosfera unica</p>
+  </div>
+  <div class="gallery-grid" id="galleryGrid"></div>
+</section>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="Galleria">
+  <button class="lb-close" id="lbClose" aria-label="Chiudi"><i class="fas fa-xmark" aria-hidden="true"></i></button>
+  <button class="lb-prev" id="lbPrev" aria-label="Immagine precedente"><i class="fas fa-chevron-left"></i></button>
+  <div class="lb-stage" id="lbStage"></div>
+  <button class="lb-next" id="lbNext" aria-label="Immagine successiva"><i class="fas fa-chevron-right"></i></button>
+  <div class="lb-counter" id="lbCounter"></div>
+</div>
+
+<!-- LOCATION -->
+<section id="location" class="section">
+  <div class="section-header reveal">
+    <h2 class="gradient-text" data-i18n="location_title">Dove Siamo</h2>
+    <div class="section-divider"></div>
+    <p data-i18n="location_subtitle">Vieni a trovarci — siamo aperti tutti i giorni</p>
+  </div>
+  <div class="location-wrapper reveal">
+    <div class="location-info">
+      <div class="location-card-detail">
+        <h3><i class="fas fa-location-dot"></i> <span data-i18n="loc_address_title">Indirizzo</span></h3>
+        <p data-i18n="loc_address_val">Via Riccardo Lombardi, 1<br>00030 Valle Martella (RM)</p>
+        <a href="https://maps.app.goo.gl/krswxMJfJtvFPN9j8" target="_blank" rel="noopener noreferrer" class="location-map-link"><span data-i18n="loc_view_map">Apri in Google Maps</span> <i class="fas fa-external-link-alt"></i></a>
+      </div>
+      <div class="location-card-detail">
+        <h3><i class="fas fa-clock"></i> <span data-i18n="loc_hours_title">Orari di Apertura</span></h3>
+        <div class="hours-grid">
+          <span data-i18n="loc_hours_lunch_label">Pranzo:</span>
+          <span class="hours-val" data-i18n="loc_hours_lunch_val">12:30 – 15:30</span>
+          <span data-i18n="loc_hours_dinner_label">Cena:</span>
+          <span class="hours-val" data-i18n="loc_hours_dinner_val">18:30 – 23:00</span>
+          <span data-i18n="loc_hours_fri_label">Ven-Sab:</span>
+          <span class="hours-val" data-i18n="loc_hours_fri_val">18:30 – 00:00</span>
+          <span data-i18n="loc_hours_open_label">Apertura:</span>
+          <span class="hours-val" data-i18n="loc_hours_open_val">Tutti i giorni</span>
+        </div>
+      </div>
+      <div class="location-card-detail">
+        <h3><i class="fas fa-phone"></i> <span data-i18n="loc_phone_title">Telefono</span></h3>
+        <p><a href="tel:+393474329466" class="link-gold">+39 347 432 9466</a></p>
+      </div>
+    </div>
+    <div>
+      <div class="location-map-frame">
+        <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=12.712%2C41.88%2C12.732%2C41.9&amp;layer=mapnik&amp;marker=41.89%2C12.722" title="Mappa La Bontà Ristorante" width="600" height="400" loading="lazy" referrerpolicy="no-referrer"></iframe>
+      </div>
+      <a href="https://www.openstreetmap.org/?mlat=41.89&amp;mlon=12.722#map=16/41.89/12.722" target="_blank" rel="noopener noreferrer" class="location-map-link"><span data-i18n="loc_view_full_map">Vedi mappa completa</span> <i class="fas fa-external-link-alt"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- RESERVATION BUTTON (opens modal) -->
+<div class="reserve-cta-wrap">
+  <button class="btn btn-primary" id="openReserveBtn" data-i18n="reserve_cta">Prenota un Tavolo</button>
+</div>
+
+<!-- RESERVATION MODAL -->
+<div class="modal-overlay" id="reserveModal">
+  <div class="modal" role="dialog" aria-label="Reservation">
+    <button class="modal-close" id="reserveModalClose" aria-label="Chiudi"><i class="fas fa-xmark" aria-hidden="true"></i></button>
+    <h3 class="gradient-text" data-i18n="reserve_title">Prenota un Tavolo</h3>
+    <div id="reserveFormContainer">
+      <form class="reserve-form" id="reserveForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="reserveDate" data-i18n="reserve_date">Data</label>
+            <input type="date" id="reserveDate" required min="">
+          </div>
+          <div class="form-group">
+            <label for="reserveTime" data-i18n="reserve_time">Ora</label>
+            <select id="reserveTime" required>
+              <option value="" data-i18n="reserve_time_placeholder" disabled selected>Seleziona ora</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label data-i18n="reserve_guests">Numero Ospiti</label>
+            <div class="people-toggle">
+              <button type="button" id="guestMinus"><i class="fas fa-minus"></i></button>
+              <span id="guestCount">2</span>
+              <button type="button" id="guestPlus"><i class="fas fa-plus"></i></button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="reserveName" data-i18n="reserve_name">Nome</label>
+            <input type="text" id="reserveName" placeholder="Mario Rossi" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="reservePhone" data-i18n="reserve_phone">Telefono</label>
+            <input type="tel" id="reservePhone" placeholder="+39 3XX XXX XXXX" required>
+          </div>
+          <div class="form-group">
+            <label for="reserveEmail"><span data-i18n="reserve_email">Email</span> <span class="label-opt" data-i18n="reserve_optional">(opzionale)</span></label>
+            <input type="email" id="reserveEmail" placeholder="email@esempio.it">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="reserveNotes" data-i18n="reserve_notes">Note</label>
+          <textarea id="reserveNotes" placeholder="Allergie, richieste speciali..." rows="2"></textarea>
+        </div>
+        <button type="submit" class="reserve-btn" data-i18n="reserve_submit">Prenota Ora</button>
+      </form>
+      <div class="reserve-success" id="reserveSuccess">
+        <i class="fas fa-check-circle"></i>
+        <h3 data-i18n="reserve_success_title">Prenotazione Confermata!</h3>
+        <p data-i18n="reserve_success_text">Grazie, ti abbiamo inviato un riepilogo. Puoi confermare su WhatsApp.</p>
+        <a id="reserveWaConfirm" href="#" target="_blank" rel="noopener noreferrer" class="wa-confirm"><i class="fab fa-whatsapp"></i> <span data-i18n="reserve_success_wa">Conferma su WhatsApp</span></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTATTI -->
+<section id="contatti" class="section">
+  <div class="section-header reveal">
+    <h2 class="gradient-text" data-i18n="contatti_title">Contatti</h2>
+    <div class="section-divider"></div>
+    <p data-i18n="contatti_subtitle">Siamo sempre a tua disposizione</p>
+  </div>
+  <div class="contatti-grid reveal">
+    <div class="contatti-card">
+      <i class="fas fa-phone"></i>
+      <h3 data-i18n="contatti_phone_title">Telefono</h3>
+      <p><a href="tel:+393474329466">+39 347 432 9466</a></p>
+      <p><a href="tel:+390612345678">+39 06 1234 5678</a></p>
+      <p><a href="tel:+390687654321">+39 06 8765 4321</a></p>
+    </div>
+    <div class="contatti-card">
+      <i class="fas fa-clock"></i>
+      <h3 data-i18n="contatti_hours_title">Orari</h3>
+      <p data-i18n="contatti_hours_lunch">Pranzo: 12:30 – 15:30</p>
+      <p data-i18n="contatti_hours_dinner">Cena: 18:30 – 23:00</p>
+      <p data-i18n="contatti_hours_fri">Ven-Sab: fino alle 00:00</p>
+      <p class="hours-open" data-i18n="contatti_hours_open">Sempre Aperti</p>
+    </div>
+    <div class="contatti-card">
+      <i class="fas fa-share-nodes"></i>
+      <h3 data-i18n="contatti_social_title">Social</h3>
+      <p>Seguici sui nostri canali</p>
+      <div class="social-links">
+        <a href="https://www.instagram.com/la_bonta_ristorante" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/LaBontaRistorante" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.tripadvisor.com" target="_blank" rel="noopener noreferrer" aria-label="TripAdvisor"><i class="fab fa-tripadvisor"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="wa-cta-wrap">
+    <a href="https://wa.me/393474329466" target="_blank" rel="noopener noreferrer" class="wa-cta"><i class="fab fa-whatsapp"></i> <span data-i18n="contatti_wa_cta">Scrivici su WhatsApp</span></a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="footer">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <div class="footer-logo">La Bontà</div>
+      <p class="footer-tagline" data-i18n="footer_tagline">Autentica cucina italiana dal 1998</p>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/la_bonta_ristorante" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/LaBontaRistorante" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.tripadvisor.com" target="_blank" rel="noopener noreferrer" aria-label="TripAdvisor"><i class="fab fa-tripadvisor"></i></a>
+        <a href="https://wa.me/393474329466" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h3 data-i18n="footer_contacts_title">Contatti</h3>
+      <p><i class="fas fa-location-dot"></i> Via Riccardo Lombardi, 1<br>00030 Valle Martella (RM)</p>
+      <p><i class="fas fa-phone"></i> +39 347 432 9466</p>
+      <p><i class="fas fa-envelope"></i> info@labontaristorante.it</p>
+    </div>
+    <div class="footer-col">
+      <h3 data-i18n="footer_hours_title">Orari</h3>
+      <p data-i18n="footer_hours_lunch">Pranzo: 12:30 – 15:30</p>
+      <p data-i18n="footer_hours_dinner">Cena: 18:30 – 23:00</p>
+      <p data-i18n="footer_hours_fri">Ven-Sab: fino alle 00:00</p>
+      <p class="footer-open" data-i18n="footer_hours_open">Aperto tutti i giorni</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 La Bontà Ristorante &nbsp;·&nbsp; Made with <span class="heart"><svg class="ico" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></span> in Valle Martella</p>
+  </div>
+</footer>
+
+<!-- WHATSAPP FAB -->
+<div id="wa-fab">
+  <div id="wa-menu">
+    <button class="wa-menu-item" id="waReserve"><i class="fas fa-calendar-check"></i> <span data-i18n="wa_reserve">Prenota un Tavolo</span></button>
+    <button class="wa-menu-item" id="waTakeaway"><i class="fas fa-shopping-bag"></i> <span data-i18n="wa_takeaway">Ordina da Asporto</span></button>
+    <button class="wa-menu-item" id="waInfo"><i class="fas fa-info-circle"></i> <span data-i18n="wa_info">Info</span></button>
+  </div>
+  <button class="wa-fab-btn" id="waFabBtn" aria-label="WhatsApp menu"><i class="fab fa-whatsapp"></i></button>
+</div>
+
+<!-- ADMIN PANEL (hidden unless ?admin=true) -->
+<div id="adminPanel" hidden>
+  <div class="section-header">
+    <h2 class="gradient-text" data-i18n="admin_title">Admin — Prenotazioni</h2>
+    <div class="section-divider"></div>
+  </div>
+  <div id="adminTableContainer"></div>
+</div>
+
+<script src="js/app.js" defer></script>
+</body>
+</html>

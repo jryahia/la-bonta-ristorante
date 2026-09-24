@@ -1,6 +1,6 @@
 # La Bontà Ristorante
 
-Premium Italian restaurant website — an immersive, single-file experience with a luxury dark-gold aesthetic, full multilingual support, and rich interactive features.
+Premium Italian restaurant website — an immersive static site with a dark glassmorphism, black-and-gold aesthetic, full multilingual support, and rich interactive features.
 
 > <svg style="display:inline-block;width:1em;height:1em;vertical-align:-0.125em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 22h8"/><path d="M12 11v11"/><path d="M10 22V9a4 4 0 014-4 4 4 0 014 4v13"/></svg> **Demo live:** [https://jryahia.github.io/la-bonta-ristorante/](https://jryahia.github.io/la-bonta-ristorante/) — hosted on GitHub Pages
 
@@ -19,16 +19,29 @@ Premium Italian restaurant website — an immersive, single-file experience with
 
 ## Perché questo sito
 
-- **100% single-file** — HTML, CSS e JavaScript in un unico file, senza build step
-- **Lusso coerente** — palette oro su nero (#C9A14A / #0A0A0A) in ogni sezione
+- **Statico, senza build step** — HTML, CSS e JavaScript vanilla in `public/`
+- **Lusso coerente** — vetro scuro su nero puro (#000) con accenti oro (#C9A14A)
 - **Mobile-first e responsive** — menù circolare e layout ottimizzati su ogni schermo
 - **SEO ready** — meta description, semantica HTML, dati strutturati
 - **Accessibilità** — navigazione da tastiera, contraste WCAG-aware
-- **Prestazioni** — nessun framework, caricamento immediato
+- **Prestazioni** — Three.js caricato in idle, CSS non bloccanti, zero CLS da immagini
+- **Sicurezza** — CSP rigorosa senza `unsafe-inline`, SRI sulle risorse CDN, nessun `innerHTML` con dati utente
 
 ## Tecnologie
 
 HTML5 · CSS3 · JavaScript (vanilla) · Three.js · Font Awesome · OpenStreetMap · i18n
+
+## Deploy (Cloudflare Pages)
+
+| Impostazione | Valore |
+|---|---|
+| Framework preset | None |
+| Build command | *(vuoto)* |
+| Build output directory | `public` |
+
+Gli header di sicurezza (CSP, HSTS, X-Frame-Options, Permissions-Policy) sono in `public/_headers`.
+
+In locale: `start.bat`, oppure `python -m http.server -d public`.
 
 ## Contatti attività
 
