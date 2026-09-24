@@ -1013,3 +1013,7 @@ function loadReservations(){
 
 /* ===== INIT ===== */
 applyLanguage('it');
+// Reveal safety net: show anything the observer missed (background tabs, hidden sections)
+setTimeout(function(){
+  document.querySelectorAll('.reveal').forEach(function(node){ node.classList.add('visible'); });
+}, 3000);
