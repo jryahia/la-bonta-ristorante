@@ -7,6 +7,7 @@ a{color:inherit;text-decoration:none}
 button{cursor:pointer;font-family:inherit;border:none;background:none;color:inherit}
 input,textarea,select{font-family:inherit;font-size:inherit}
 ul{list-style:none}
+[hidden]{display:none!important}
 
 /* ===== PREFERS REDUCED MOTION ===== */
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important}.gold-sparkle{display:none}}
@@ -278,7 +279,7 @@ ul{list-style:none}
 .reserve-btn:hover{background:linear-gradient(135deg,#e0be6a,#C9A14A);transform:translateY(-2px);box-shadow:0 10px 30px rgba(201,161,74,0.3)}
 .reserve-success{text-align:center;padding:24px;display:none}
 .reserve-success.show{display:block}
-.reserve-success i{font-size:48px;color:#22c55e;margin-bottom:12px}
+.reserve-success > i{font-size:48px;color:#22c55e;margin-bottom:12px}
 .reserve-success h3{font-family:Cinzel,serif;font-size:20px;color:#C9A14A;margin-bottom:8px}
 .reserve-success p{color:var(--text-muted);margin-bottom:16px}
 .reserve-success .wa-confirm{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:50px;background:#15803d;color:#fff;font-family:Cinzel,serif;font-size:13px;letter-spacing:1px;font-weight:600;transition:background 0.3s,transform 0.5s var(--spring)}
