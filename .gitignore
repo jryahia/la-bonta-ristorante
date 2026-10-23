@@ -15,3 +15,6 @@ desktop.ini
 
 # Local screenshots
 SS/
+# deployment link and provenance stamp
+.vercel/
+.automialabs.json
