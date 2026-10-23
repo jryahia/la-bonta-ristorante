@@ -64,6 +64,7 @@ ul{list-style:none}
 .header-phone{display:flex;align-items:center;gap:6px;color:#C9A14A;font-size:14px;font-weight:500;padding:8px 14px;background:var(--glass);border:1px solid var(--glass-border);border-radius:10px;transition:border-color 0.3s,box-shadow 0.3s,transform 0.4s var(--spring)}
 .header-phone:hover{border-color:var(--glass-border-hover);box-shadow:var(--glow);transform:translateY(-1px)}
 
+i[class*="fa-"]{display:inline-block;width:1em;height:1em;line-height:1;text-align:center;vertical-align:-.125em}
 /* ===== HERO DECORATIVE ICONS ===== */
 .hero-deco{position:absolute;z-index:0;pointer-events:none;opacity:0.06;font-size:120px;color:#C9A14A}
 .hero-deco-1{top:12%;left:5%;animation:floatSlow 8s ease-in-out infinite}
