@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://la-bonta-ristorante-hq.vercel.app/sitemap.xml
